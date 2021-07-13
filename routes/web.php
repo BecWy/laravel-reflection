@@ -29,13 +29,13 @@ require __DIR__.'/auth.php';
 //Companies page
 Route::get('/companies', function () {
     return view('companies');
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['auth'])->name('companies');
 
 
 //Employees page
 Route::get('/employees', function () {
     return view('employees');
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['auth'])->name('employees');
 
 //redirect the register page to the login page(don't want to delete this in case I want to add this functionality another time)
 Route::get('/register', function () {

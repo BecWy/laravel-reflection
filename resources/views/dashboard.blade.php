@@ -20,7 +20,7 @@
     </div>
 
     <div>
-        <a href="employees"><h2>Employees</h2></a>
+        <a href="/employees"><h2>Employees</h2></a>
     </div>
 
 </x-app-layout>
