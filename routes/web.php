@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 
 Route::get('/dashboard', function () {
@@ -22,3 +22,22 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+
+//MY ROUTES
+
+//Companies page
+Route::get('/companies', function () {
+    return view('companies');
+})->middleware(['auth'])->name('dashboard');
+
+
+//Employees page
+Route::get('/employees', function () {
+    return view('employees');
+})->middleware(['auth'])->name('dashboard');
+
+//redirect the register page to the login page(don't want to delete this in case I want to add this functionality another time)
+Route::get('/register', function () {
+    return redirect('/login');
+});

@@ -14,4 +14,13 @@
             </div>
         </div>
     </div>
+
+    <div>
+        <a href="/companies"><h2>Companies</h2></a>
+    </div>
+
+    <div>
+        <a href="employees"><h2>Employees</h2></a>
+    </div>
+
 </x-app-layout>
