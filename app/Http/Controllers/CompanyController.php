@@ -32,10 +32,6 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        // this needs to return a create new company view
-        //ah this companies.create business reflects the file structure I think?
-        //Do i need to create a companies folder, with each of these files saved within it???????
-        //TRY THE ABOVE
         return view('companies.create');
     }
 
@@ -51,14 +47,14 @@ class CompanyController extends Controller
         $request->validate([
             //need to add all of the correct columns
             'name' => 'required',
-            'email' => 'required',
         ]);
 
         Company::create($request->all());
-     
-        return redirect()->route('companies.index')
-                        ->with('success','Company created successfully.'
-        );
+
+        return redirect()->route('companies')
+            ->with('success','Company updated successfully'); //this bit's not working, need to read flash message notes
+        //the above routed is named 'companies' so I don't need to write 'companies.index'
+
     }
 
     /**
@@ -69,7 +65,7 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        //you would use this to show ONE company
+        //you would use this to show ONE company. Not needed for this project at the moment.
         //not sure what compact does - google
         return view('companies.show',compact('company.'));
     }
@@ -82,7 +78,7 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
-        //display the edit form.
+        //display the edit form. Compact is necessary here -it won't work without it.
         return view('companies.edit',compact('company'));
     }
 
@@ -95,16 +91,18 @@ class CompanyController extends Controller
      */
     public function update(Request $request, Company $company)
     {
+        //when this doesn't work don't forget to look for mass assignment issues, protected guarded etc
+        //also form field names have to match the column names
+        
         //NEED VALIDATION HERE, changes are persisted here as well as in store
         $request->validate([
             'name' => 'required',
         ]);
     
         $company->update($request->all());
-    
-        return redirect()->route('companies.index')
-                        ->with('success','Company updated successfully');
-
+        return redirect()->route('companies')
+            ->with('success','Company updated successfully'); //this bit's not working, need to read flash message notes
+        //the above routed is named 'companies' so I don't need to write 'companies.index'
     }
 
     /**
