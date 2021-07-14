@@ -116,7 +116,13 @@ class CompanyController extends Controller
         //VALIDATE THE REQUEST?????????????????? Maybe add an are you sure? popup
         $company->delete();
     
-        return redirect()->route('companies.index')
-                        ->with('success','Company deleted successfully');
+        return redirect()->route('companies')
+            ->with('success','Company deleted successfully');
+    }
+
+    //takes you to the delete blade file
+    public function delete(Company $company)
+    {
+        return view('companies.delete',compact('company'));
     }
 }

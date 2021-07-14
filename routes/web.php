@@ -32,17 +32,9 @@ require __DIR__.'/auth.php';
 Route::get('companies', [CompanyController::class, 'index'])->middleware(['auth'])->name('companies');
 
 
-
-
-
-
 //Companies - show
 //only need this if I want to display one individual company.
 
-//Companies - destroy. GET OR POST???? OR ONE FOR EACH???
-Route::get('companies/destroy', [CompanyController::class, 'destroy']);
-//->middleware(['auth'])->name('companies');
-Route::post('companies/destroy', [CompanyController::class, 'destroy']);
 
 
 //Add a new company
@@ -54,12 +46,30 @@ Route::post('companies/create', [CompanyController::class, 'store']);
 //->middleware(['auth'])->name('companies');
 
 
+
 //Edit an existing company
 //Companies - edit - display the edit form
 Route::get('companies/{company:id}/edit', [CompanyController::class, 'edit']); //WORKS - goes to the companies edit blade file (currently empty)
 
 //Companies - update - save the changes from the edit
 Route::post('companies/{company:id}/edit', [CompanyController::class, 'update']);
+
+
+//Companies - destroy.
+//Takes you to a delete popup
+Route::get('companies/{company:id}/delete', [CompanyController::class, 'delete']);
+
+//deletes the record - this does work
+Route::post('companies/{company:id}/destroy', [CompanyController::class, 'destroy']);
+
+//deletes the record - DOESN'T DO ANYTHING
+//Route::delete('companies/{company:id}/delete', [CompanyController::class, 'destroy']);
+
+//Route::get('companies/destroy', [CompanyController::class, 'destroy']);
+//->middleware(['auth'])->name('companies');
+//Route::post('companies/destroy', [CompanyController::class, 'destroy']);
+
+
 
 
 
