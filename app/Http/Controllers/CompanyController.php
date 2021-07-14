@@ -98,7 +98,6 @@ class CompanyController extends Controller
         //NEED VALIDATION HERE, changes are persisted here as well as in store
         $request->validate([
             'name' => 'required',
-            'email' => 'required',
         ]);
     
         $company->update($request->all());

@@ -9,10 +9,10 @@
     <div class="mx-auto m-w-full overflow-x-auto">
 
         <div class="flex flex-row items-end justify-end">
-            <a href="#">Create Button</a>
+            <a href="/companies/create">Create Button</a>
         </div>
 
-        <table class="my-4 py-4 bg-white m-w-full">
+        <table class="my-4 py-4 bg-white m-w-full w-full">
             <tr>
                 <th class="bg-blue-100 border text-left px-4 py-2">ID</th>
                 <th class="bg-blue-100 border text-left px-4 py-2">Name</th>
@@ -23,14 +23,15 @@
             </tr>
 
             @foreach ($companies as $company)
+            
             <tr>
                 <td class="border px-4 py-2 align-top text-sm">{{$company->id;}}</td>
                 <td class="border px-4 py-2 align-top text-sm">{{$company->name;}}</td>
                 <td class="border px-4 py-2 align-top text-sm">{{$company->email;}}</td>
-                <td class="border px-4 py-2 align-top text-sm">{{$company->logo;}}</td>
+                <td class="border px-4 py-2 align-top text-sm"><img src="{{$company->logo;}}" class="h-11 h-11"></img></td>
                 <td class="border px-4 py-2 align-top text-sm">{{$company->website;}}</td>
                 <td class="border px-4 py-2 align-top text-sm">
-                    <a href="#">Edit</a>
+                    <a href="/companies/{{$company->id}}/edit" class="pr-2">Edit</a>
                     <a href="#">Del</a>
                 </td>
             </tr>
@@ -50,6 +51,8 @@
         <p>Ah I think this is because the min height for the layout container is smaller than my screen height.</p>
         <p>I need to set the min height to 100vh instead of whatever is there at the moment.</p>
     </div>
+
+    <br>
 
 </x-app-layout>
 
