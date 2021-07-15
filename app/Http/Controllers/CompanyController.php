@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller; //I added this to try and fix pagination
 use Illuminate\Support\Facades\DB; //I added this to try and fix pagination
+use Illuminate\Support\Facades\File; //needed to delete a file
 
 
 class CompanyController extends Controller
@@ -64,7 +65,6 @@ class CompanyController extends Controller
         $fileName = $request->logo->getClientOriginalName();
         
         $filePath = 'logos/' . $fileName;
-        //$filePath = '/app/public/logos/' . $fileName;
         $newCompany = Company::create($request->all());
         $newCompany->logo = $filePath;
         $newCompany->save();
@@ -74,10 +74,6 @@ class CompanyController extends Controller
         // if ($request->file('logo')->isValid()) {
         //     //
         // }
-        
-        
-        //THIS WORKS, just trying to create a better version
-        //Company::create($request->all());
       
         return redirect()->route('companies')
             ->with('success','Company updated successfully'); //this bit's not working, need to read flash message notes
@@ -126,8 +122,30 @@ class CompanyController extends Controller
         $request->validate([
             'name' => 'required',
         ]);
-    
-        $company->update($request->all());
+
+        //if logo file has changed update the filepath, delete the old file (if this exists), and save the new file
+        if($request->logo) {
+            $fileName = $request->logo->getClientOriginalName();
+            $filePath = 'logos/' . $fileName;
+            
+            if($filePath !== $company->logo)
+            {
+                if(File::exists($company->logo)) {
+                    File::delete($company->logo);
+                }
+
+                //file is saved
+                $request->file('logo')->storeAs('logos/', $fileName); //saved with the original file name
+                $company->logo = $filePath;
+                
+
+                $company->save();
+                $company->update();
+                
+            }
+            //$company->update($request->all());
+        }
+
         return redirect()->route('companies')
             ->with('success','Company updated successfully'); //this bit's not working, need to read flash message notes
         //the above routed is named 'companies' so I don't need to write 'companies.index'
@@ -142,11 +160,22 @@ class CompanyController extends Controller
     public function destroy(Company $company)
     {
         //VALIDATE THE REQUEST?????????????????? Maybe add an are you sure? popup
+        
+        //delete the logo file from public/logos
+        if(File::exists($company->logo)) {
+            File::delete($company->logo);
+        }
+        
         $company->delete();
     
         return redirect()->route('companies')
             ->with('success','Company deleted successfully');
     }
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////
+    //Other methods ////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////
 
     //takes you to the delete blade file
     public function delete(Company $company)
@@ -154,12 +183,14 @@ class CompanyController extends Controller
         return view('companies.delete',compact('company'));
     }
 
+
     //retrieve the logo
     public function getLogoAttribute()
     {
         return $this->logo;
     }
 
+    //upload a logo
     public function uploadOne(UploadedFile $uploadedFile, $folder = null, $disk = 'public', $filename = null)
     {
         $name = !is_null($filename) ? $filename : Str::random(25);
@@ -169,5 +200,15 @@ class CompanyController extends Controller
         return $file;
     }
 
+    //delete a logo
+    public static function removeImage(Request $request)
+    {
+        if(File::exists('logos/' . $request->logo )) {
+            File::delete('logos/' . $request->logo);
+        }
+        // else{
+        //     dd('File does not exists.');
+        // }
+    }
 
 }

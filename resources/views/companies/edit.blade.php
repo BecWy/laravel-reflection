@@ -1,3 +1,7 @@
+<?php
+use App\Http\Controllers\CompanyController;
+?>
+
 <x-app-layout>
   
     <x-slot name="header">
@@ -53,6 +57,10 @@
                                 @if($company->logo)
                                     <p>Current file:</p>
                                     <p>{{$company->logo}}</p>
+
+                                    <p id="delete-logo" class="cursor-pointer">Delete Current File</p>
+                                    
+
                                 @endif
                                 <br>
                                 <!-- this label acts as the button -->
