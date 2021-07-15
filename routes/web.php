@@ -42,7 +42,7 @@ Route::get('companies', [CompanyController::class, 'index'])->middleware(['auth'
 Route::get('companies/create', [CompanyController::class, 'create']); //WORKS - goes to the companies create blade file (currently empty) 
 
 //Companies - store
-Route::post('companies/create', [CompanyController::class, 'store']);
+Route::post('companies/create', [CompanyController::class, 'store'])->name('companies.store');
 //->middleware(['auth'])->name('companies');
 
 
@@ -61,15 +61,6 @@ Route::get('companies/{company:id}/delete', [CompanyController::class, 'delete']
 
 //deletes the record - this does work
 Route::post('companies/{company:id}/destroy', [CompanyController::class, 'destroy']);
-
-//deletes the record - DOESN'T DO ANYTHING
-//Route::delete('companies/{company:id}/delete', [CompanyController::class, 'destroy']);
-
-//Route::get('companies/destroy', [CompanyController::class, 'destroy']);
-//->middleware(['auth'])->name('companies');
-//Route::post('companies/destroy', [CompanyController::class, 'destroy']);
-
-
 
 
 

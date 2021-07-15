@@ -16,8 +16,9 @@
 
                 @auth
                     <form method="POST" 
-                            action="/companies/create" 
+                            action="{{ route('companies.store') }}" 
                             class="w-9/12" 
+                            role="form"
                             enctype="multipart/form-data"> 
                         @csrf
 
@@ -48,17 +49,16 @@
                                 <label for="logo" class="font-bold">Logo</label><br>
                                 <br>
                                 <!-- this label acts as the button -->
-                                <label class="relative w-12 my-12 mb-20 py-2 px-2 bg-indigo-700 text-white text-center font-bold uppercase w-full h-full cursor-pointer">
+                                <!-- <label class="relative w-12 my-12 mb-20 py-2 px-2 bg-indigo-700 text-white text-center font-bold uppercase w-full h-full cursor-pointer"> -->
                                     <input type="file" 
                                         id="logo" 
                                         name="logo" 
                                         class="w-full"
-                                        content="hi"
-                                        style="display:none"
+                                        
                                     >
                                     
-                                Upload
-                                </label>    
+                                <!-- Upload style="display:none" -->
+                                <!-- </label>     -->
                             </div>
 
                             <div class="my-2">
@@ -75,7 +75,7 @@
 
                         <div id="button-div" class="my-4 mt-8 bg-indigo-700 text-white text-center">
                             <button type="submit" id="submit-button" class="font-bold uppercase w-full h-full py-3"> 
-                                Update
+                                Create
                             </button>
                         </div>
                     </form>

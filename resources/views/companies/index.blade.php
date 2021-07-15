@@ -28,7 +28,7 @@
                 <td class="border px-4 py-2 align-top text-sm">{{$company->id;}}</td>
                 <td class="border px-4 py-2 align-top text-sm">{{$company->name;}}</td>
                 <td class="border px-4 py-2 align-top text-sm">{{$company->email;}}</td>
-                <td class="border px-4 py-2 align-top text-sm"><img src="{{$company->logo;}}" class="h-11 h-11"></img></td>
+                <td class="border px-4 py-2 align-top text-sm"><img src="{{ $company->logo }}" alt="image" class="h-11 h-11"></img></td>
                 <td class="border px-4 py-2 align-top text-sm">{{$company->website;}}</td>
                 <td class="border px-4 py-2 align-top text-sm">
                     <a href="/companies/{{$company->id}}/edit" class="pr-2">Edit</a>
@@ -36,7 +36,7 @@
                 </td>
             </tr>
             @endforeach
-            
+      
         </table>
 
         @if($companies->count())

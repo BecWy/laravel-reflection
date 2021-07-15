@@ -61,7 +61,6 @@
                                         id="logo" 
                                         name="logo" 
                                         class="w-full"
-                                        content="hi"
                                         style="display:none"
                                     >
                                     

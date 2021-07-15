@@ -47,15 +47,43 @@ class CompanyController extends Controller
         $request->validate([
             //need to add all of the correct columns
             'name' => 'required',
+            'logo' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        Company::create($request->all());
+     
+        //////WORKING FILE SAVING////
+        //Using the original file name for now. May return to working on a way to use the company name later.
+        $request->file('logo')->storeAs('logos/', $request->logo->getClientOriginalName()); //saved with the original file name
+       
+        //Saves as the company name. but needs to remove spaces and add the file extension
+        //$request->file('logo')->storeAs('logos/', $request->name); //this line works
+            //try adding this: $request->file->extension(); 
 
+
+        //Creating the new company and storing the logo file location to the database
+        $fileName = $request->logo->getClientOriginalName();
+        
+        $filePath = 'logos/' . $fileName;
+        //$filePath = '/app/public/logos/' . $fileName;
+        $newCompany = Company::create($request->all());
+        $newCompany->logo = $filePath;
+        $newCompany->save();
+
+
+        //for adding validation later
+        // if ($request->file('logo')->isValid()) {
+        //     //
+        // }
+        
+        
+        //THIS WORKS, just trying to create a better version
+        //Company::create($request->all());
+      
         return redirect()->route('companies')
             ->with('success','Company updated successfully'); //this bit's not working, need to read flash message notes
-        //the above routed is named 'companies' so I don't need to write 'companies.index'
-
+        //the above route is named 'companies' so I don't need to write 'companies.index'
     }
+
 
     /**
      * Display the specified resource.
@@ -125,4 +153,21 @@ class CompanyController extends Controller
     {
         return view('companies.delete',compact('company'));
     }
+
+    //retrieve the logo
+    public function getLogoAttribute()
+    {
+        return $this->logo;
+    }
+
+    public function uploadOne(UploadedFile $uploadedFile, $folder = null, $disk = 'public', $filename = null)
+    {
+        $name = !is_null($filename) ? $filename : Str::random(25);
+
+        $file = $uploadedFile->storeAs($folder, $name.'.'.$uploadedFile->getClientOriginalExtension(), $disk);
+
+        return $file;
+    }
+
+
 }
