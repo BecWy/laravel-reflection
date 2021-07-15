@@ -54,6 +54,9 @@ Route::get('companies/{company:id}/edit', [CompanyController::class, 'edit']); /
 //Companies - update - save the changes from the edit
 Route::post('companies/{company:id}/edit', [CompanyController::class, 'update']);
 
+//Companies - delete a logo on the edit page
+//Route::post('companies/{company:id}/edit', [CompanyController::class, 'destroyLogo'])->name('companies.destroyLogo');
+
 
 //Companies - destroy.
 //Takes you to a delete popup
@@ -61,6 +64,7 @@ Route::get('companies/{company:id}/delete', [CompanyController::class, 'delete']
 
 //deletes the record - this does work
 Route::post('companies/{company:id}/destroy', [CompanyController::class, 'destroy']);
+
 
 
 

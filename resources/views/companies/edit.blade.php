@@ -11,7 +11,7 @@ use App\Http\Controllers\CompanyController;
     </x-slot>
 
 
-    <div class="h-screen w-screen flex justify-center items-center fixed inset-0 z-50"> 
+    <div id="modal" class="modal h-screen w-screen flex justify-center items-center fixed inset-0 z-50"> 
         <div class="bg-gray-100 border-2 w-11/12 max-w-screen-md max-h-full overflow-y-auto">
             <!-- <p>When the edit button is clicked</p>
             <p>1. I need to find the correct row in the database</p>
@@ -58,8 +58,11 @@ use App\Http\Controllers\CompanyController;
                                     <p>Current file:</p>
                                     <p>{{$company->logo}}</p>
 
-                                    <p id="delete-logo" class="cursor-pointer">Delete Current File</p>
-                                    
+                                    <!-- //need to change this to a button and set the formaction -->
+                                    <!-- <a href=" route('companies.destroyLogo') "><p id="delete-logo" class="cursor-pointer">Delete Current File</p></a> -->
+                                    <!-- <a href="/companies/delete-logo" id="submit-button" class="font-bold uppercase w-full h-full py-3"> 
+                                        Delete Logo
+                                    </a> -->
 
                                 @endif
                                 <br>

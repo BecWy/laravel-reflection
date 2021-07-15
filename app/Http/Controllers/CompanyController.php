@@ -128,23 +128,28 @@ class CompanyController extends Controller
             $fileName = $request->logo->getClientOriginalName();
             $filePath = 'logos/' . $fileName;
             
-            if($filePath !== $company->logo)
-            {
+            if($filePath !== $company->logo) {
                 if(File::exists($company->logo)) {
                     File::delete($company->logo);
                 }
 
-                //file is saved
+                //update the logo file path
                 $request->file('logo')->storeAs('logos/', $fileName); //saved with the original file name
                 $company->logo = $filePath;
-                
-
-                $company->save();
-                $company->update();
-                
             }
-            //$company->update($request->all());
         }
+
+        //update the name if this has changed
+            $company->name = $request->name;
+
+        //update the email if this has changed
+            $company->email = $request->email;
+
+        //update the website if this has changed
+            $company->website = $request->website;
+
+        $company->save();
+        $company->update();
 
         return redirect()->route('companies')
             ->with('success','Company updated successfully'); //this bit's not working, need to read flash message notes
@@ -185,30 +190,35 @@ class CompanyController extends Controller
 
 
     //retrieve the logo
-    public function getLogoAttribute()
-    {
-        return $this->logo;
-    }
+    // public function getLogoAttribute()
+    // {
+    //     return $this->logo;
+    // }
 
     //upload a logo
-    public function uploadOne(UploadedFile $uploadedFile, $folder = null, $disk = 'public', $filename = null)
-    {
-        $name = !is_null($filename) ? $filename : Str::random(25);
+    // public function uploadOne(UploadedFile $uploadedFile, $folder = null, $disk = 'public', $filename = null)
+    // {
+    //     $name = !is_null($filename) ? $filename : Str::random(25);
 
-        $file = $uploadedFile->storeAs($folder, $name.'.'.$uploadedFile->getClientOriginalExtension(), $disk);
+    //     $file = $uploadedFile->storeAs($folder, $name.'.'.$uploadedFile->getClientOriginalExtension(), $disk);
 
-        return $file;
-    }
+    //     return $file;
+    // }
 
-    //delete a logo
-    public static function removeImage(Request $request)
-    {
-        if(File::exists('logos/' . $request->logo )) {
-            File::delete('logos/' . $request->logo);
-        }
-        // else{
-        //     dd('File does not exists.');
-        // }
-    }
+    //delete a logo - NOT WORKING. need an image controller???????????
+    // public function destroyLogo(Request $request)
+    // {
+    //     if(File::exists('logos/' . $request->logo )) {
+    //         File::delete('logos/' . $request->logo);
+    //     }
+    //     // else{
+    //     //     dd('File does not exists.');
+    //     // }
+
+    //     //update the logo file path to null
+    //     $company->logo = null;
+    //     $company->save();
+    //     $company->update();
+    // }
 
 }
