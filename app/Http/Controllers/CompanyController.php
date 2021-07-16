@@ -45,12 +45,13 @@ class CompanyController extends Controller
     public function store(Request $request)
     {
         //1. Validate Data
-        $validated = $request->validate([
+        $request->validate([
             'name' => ['required', 'max:255'],
             'email' => ['nullable', 'email', 'max:255'],
-            'logo' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'min:100', 'max:2048'],
-            'website' => ['nullable', 'url']
+            'logo' => ['nullable', 'max:255', 'mimes:jpeg,png,jpg,gif', 'dimensions:min_width=100,min_height=100', 'image'],
+            'website' => ['nullable', 'max:255'],
         ]);
+ 
 
         //2. Save the uploaded file (if this exists)
         //Using the original file name for now. May return to working on a way to use the company name later.
@@ -117,12 +118,16 @@ class CompanyController extends Controller
         //when this doesn't work don't forget to look for mass assignment issues, protected guarded etc
         //also form field names have to match the column names
         
-        //NEED VALIDATION HERE, changes are persisted here as well as in store
+        //1. Validate Data
         $request->validate([
-            'name' => 'required',
+            'name' => ['required', 'max:255'],
+            'email' => ['nullable', 'email', 'max:255'],
+            'logo' => ['nullable', 'max:255', 'mimes:jpeg,png,jpg,gif', 'dimensions:min_width=100,min_height=100', 'image'],
+            'website' => ['nullable', 'max:255'],
         ]);
 
-        //if logo file has changed update the filepath, delete the old file (if this exists), and save the new file
+
+        //2. If logo file has changed then update the filepath, delete the old file (if this exists), and save the new file
         if($request->logo) {
             $fileName = $request->logo->getClientOriginalName();
             $filePath = 'logos/' . $fileName;
@@ -139,15 +144,20 @@ class CompanyController extends Controller
         }
 
         //update the name if this has changed
+        if($request->name) {
             $company->name = $request->name;
+        }
 
         //update the email if this has changed
+        if($request->email) {
             $company->email = $request->email;
+        }
 
         //update the website if this has changed
+        if($request->website) {
             $company->website = $request->website;
-
-        $company->save();
+        }
+        //$company->save();
         $company->update();
 
         return redirect()->route('companies')
