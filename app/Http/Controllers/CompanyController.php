@@ -21,7 +21,7 @@ class CompanyController extends Controller
     public function index()
     {       
         return view('companies.index', [
-            'companies' => DB::table('companies')->paginate(10)
+            'companies' => DB::table('companies')->orderby('name')->paginate(10)
         ]);
 
     }
@@ -44,37 +44,36 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //VALIDATION GOES IN THIS METHOD
-        $request->validate([
-            //need to add all of the correct columns
-            'name' => 'required',
-            'logo' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+        //1. Validate Data
+        $validated = $request->validate([
+            'name' => ['required', 'max:255'],
+            'email' => ['nullable', 'email', 'max:255'],
+            'logo' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'min:100', 'max:2048'],
+            'website' => ['nullable', 'url']
         ]);
 
-     
-        //////WORKING FILE SAVING////
+        //2. Save the uploaded file (if this exists)
         //Using the original file name for now. May return to working on a way to use the company name later.
-        $request->file('logo')->storeAs('logos/', $request->logo->getClientOriginalName()); //saved with the original file name
-       
-        //Saves as the company name. but needs to remove spaces and add the file extension
-        //$request->file('logo')->storeAs('logos/', $request->name); //this line works
-            //try adding this: $request->file->extension(); 
-
-
-        //Creating the new company and storing the logo file location to the database
-        $fileName = $request->logo->getClientOriginalName();
+        if($request->logo) {
+            $request->file('logo')->storeAs('logos/', $request->logo->getClientOriginalName()); //saved with the original file name
         
-        $filePath = 'logos/' . $fileName;
+        //Saves as the company name. but would need to update this to remove spaces and add the file extension
+        //$request->file('logo')->storeAs('logos/', $request->name); //this line works //try adding this: $request->file->extension(); 
+
+        //3. Create the new company. As part of this store the logo file location to the database.
+            $fileName = $request->logo->getClientOriginalName();
+            $filePath = 'logos/' . $fileName;
+        }
+
         $newCompany = Company::create($request->all());
-        $newCompany->logo = $filePath;
+
+        if($request->logo) {
+            $newCompany->logo = $filePath;
+        }
+
         $newCompany->save();
 
-
-        //for adding validation later
-        // if ($request->file('logo')->isValid()) {
-        //     //
-        // }
-      
+        //4. Redirect to the companies page.
         return redirect()->route('companies')
             ->with('success','Company updated successfully'); //this bit's not working, need to read flash message notes
         //the above route is named 'companies' so I don't need to write 'companies.index'
@@ -172,9 +171,9 @@ class CompanyController extends Controller
         }
         
         $company->delete();
-    
+
         return redirect()->route('companies')
-            ->with('success','Company deleted successfully');
+           ->with('success','Company deleted successfully');
     }
 
 
@@ -187,6 +186,7 @@ class CompanyController extends Controller
     {
         return view('companies.delete',compact('company'));
     }
+
 
 
     //retrieve the logo

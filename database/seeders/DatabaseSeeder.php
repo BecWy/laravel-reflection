@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
 
         //create one company with lots of employees
         $company = Company::factory()->create([
-            'name' => 'Company with lots of employees',
+            'name' => 'A company with lots of employees',
         ]);
 
         Employee::factory(22)->create([

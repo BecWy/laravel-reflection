@@ -22,16 +22,27 @@
                 <th class="bg-indigo-100 border text-left px-4 py-2">Actions</th>
             </tr>
             
+
             <?php
             $id = 0;
-            ?>
+            ?> 
+
             @foreach ($companies as $company)
             <?php
-            $id += 1;
+                $id += 1;
+                $currentPage =  request()->get('page');
+
+                if($currentPage) {
+                    $offset = ($currentPage - 1) * 10;
+                } else {
+                    $offset = 0;
+                }
+                
+                $calculatedID = $id + $offset; 
             ?>
-            
+
             <tr>
-                <td class="border px-4 py-2 align-top text-sm">{{$id;}}</td>
+                <td class="border px-4 py-2 align-top text-sm">{{$calculatedID;}}</td>
                 <td class="border px-4 py-2 align-top text-sm">{{$company->name;}}</td>
                 <td class="border px-4 py-2 align-top text-sm">{{$company->email;}}</td>
                 <td class="border px-4 py-2 align-top text-sm">
