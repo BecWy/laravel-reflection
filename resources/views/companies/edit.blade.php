@@ -21,7 +21,7 @@ use App\Http\Controllers\CompanyController;
             <div class="flex flex-col items-center   border bg-white my-4 mx-4" >
                 <h2 class="text-lg font-bold my-4">Edit Company</h2>
 
-                <a href="/companies" class="absolute self-end">Close</a>
+                <a href="/companies" class="absolute self-end px-4 py-2 text-lg"><i class="fas fa-times"></i></a>
 
                 <!-- still need to add a way to identify the specific company in the action -->
                 @auth

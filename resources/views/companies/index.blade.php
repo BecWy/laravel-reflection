@@ -9,7 +9,7 @@
     <div class="mx-auto m-w-full overflow-x-auto">
 
         <div class="flex flex-row items-end justify-end">
-            <a href="/companies/create">Create Button</a>
+            <a href="/companies/create" class="text-3xl" p-1><i class="far fa-plus-square"></i></a>
         </div>
 
         <table class="my-4 py-4 bg-white m-w-full w-full">
@@ -41,12 +41,12 @@
                 </td>
                 <td class="border px-4 py-2 align-top text-sm">{{$company->website;}}</td>
                 <td class="border px-4 py-2 align-top text-sm">
-                    <a href="/companies/{{$company->id}}/edit" class="pr-2">Edit</a>
-                    <a href="/companies/{{$company->id}}/delete">Del</a>
+                    <a href="/companies/{{$company->id}}/edit" class="pr-2"><i class="far fa-edit"></i></a>
+                    <a href="/companies/{{$company->id}}/delete"><i class="far fa-trash-alt"></i></a>
 
-                    <button id="modal-button" type="button">
+                    <!-- <button id="modal-button" type="button">
                         Launch demo modal
-                    </button>
+                    </button> -->
                 </td>
             </tr>
             @endforeach
