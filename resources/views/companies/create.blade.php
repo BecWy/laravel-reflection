@@ -62,7 +62,7 @@
                             </div>
 
                             <div class="my-2">
-                                <label for="website" class="font-bold">Website</label><br>
+                                <label for="website" class="font-bold">Website Domain <span class="text-sm font-normal">(example.com)</span></label><br>
                                 <input type="text" 
                                     id="website" 
                                     name="website" 

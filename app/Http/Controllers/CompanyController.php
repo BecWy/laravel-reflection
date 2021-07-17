@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller; //I added this to try and fix pagination
 use Illuminate\Support\Facades\DB; //I added this to try and fix pagination
 use Illuminate\Support\Facades\File; //needed to delete a file
+use Illuminate\Support\Str; //to use string helpers like to lower, uc words etc.
+use App\Rules\DomainName; //to use this custom validation rule
 
 
 class CompanyController extends Controller
@@ -49,7 +51,7 @@ class CompanyController extends Controller
             'name' => ['required', 'max:255'],
             'email' => ['nullable', 'email', 'max:255'],
             'logo' => ['nullable', 'max:255', 'mimes:jpeg,png,jpg,gif', 'dimensions:min_width=100,min_height=100', 'image'],
-            'website' => ['nullable', 'max:255'],
+            'website' => ['nullable', 'max:255', new DomainName],
         ]);
  
 
@@ -66,10 +68,27 @@ class CompanyController extends Controller
             $filePath = 'logos/' . $fileName;
         }
 
-        $newCompany = Company::create($request->all());
+        //sanitise and format input before it is saved
+        $name = trim(strip_tags(ucwords($request->name)));
+        $email = trim(strip_tags(Str::lower($request->email)));
+        //$logo = strip_tags($request->logo);
+        $website = trim(strip_tags(Str::lower($request->website)));
 
-        if($request->logo) {
+        //create company
+        $newCompany = Company::create($request->all());
+        
+        $newCompany->name = $name;
+
+        if($newCompany->email) {
+            $newCompany->email = $email;
+        }
+
+        if($newCompany->logo) {
             $newCompany->logo = $filePath;
+        }
+
+        if($newCompany->website) {
+            $newCompany->website = $website;
         }
 
         $newCompany->save();
