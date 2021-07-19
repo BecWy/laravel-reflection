@@ -48,10 +48,10 @@ class CompanyController extends Controller
     {
         //1. Validate Data
         $request->validate([
-            'name' => ['required', 'max:255'],
-            'email' => ['nullable', 'email', 'max:255'],
+            'name' => ['required', 'unique:companies,name', 'max:100'], //made it max 100 to stop it being too long.
+            'email' => ['nullable', 'unique:companies,email', 'email', 'max:100'], //made it max 100 to stop it being too long.
             'logo' => ['nullable', 'max:255', 'mimes:jpeg,png,jpg,gif', 'dimensions:min_width=100,min_height=100', 'image'],
-            'website' => ['nullable', 'max:255', new DomainName],
+            'website' => ['nullable', 'unique:companies,website', 'max:100', new DomainName],
         ]);
  
 
@@ -63,18 +63,19 @@ class CompanyController extends Controller
         //Saves as the company name. but would need to update this to remove spaces and add the file extension
         //$request->file('logo')->storeAs('logos/', $request->name); //this line works //try adding this: $request->file->extension(); 
 
-        //3. Create the new company. As part of this store the logo file location to the database.
+        //3. Store the logo file location to the database.
             $fileName = $request->logo->getClientOriginalName();
             $filePath = 'logos/' . $fileName;
         }
 
-        //sanitise and format input before it is saved
-        $name = trim(strip_tags(ucwords($request->name)));
+        //4. sanitise and format input before it is saved
+        $name = Str::lower($request->name);
+        $name = trim(strip_tags(ucwords($name)));
         $email = trim(strip_tags(Str::lower($request->email)));
-        //$logo = strip_tags($request->logo);
-        $website = trim(strip_tags(Str::lower($request->website)));
+        $website = str_replace("www.", " ", $request->website);
+        $website = trim(strip_tags(Str::lower($website)));
 
-        //create company
+        //5. create company
         $newCompany = Company::create($request->all());
         
         $newCompany->name = $name;
@@ -93,9 +94,9 @@ class CompanyController extends Controller
 
         $newCompany->save();
 
-        //4. Redirect to the companies page.
+        //6. Redirect to the companies page & display a flash message.
         return redirect()->route('companies')
-            ->with('success','Company updated successfully'); //this bit's not working, need to read flash message notes
+            ->with('success','Company created successfully'); 
         //the above route is named 'companies' so I don't need to write 'companies.index'
     }
 
@@ -137,14 +138,13 @@ class CompanyController extends Controller
         //when this doesn't work don't forget to look for mass assignment issues, protected guarded etc
         //also form field names have to match the column names
         
-        //1. Validate Data
+        //1. Validate Data. Have to add $company->id to unique so that the currently saved data for that company is still permitted.
         $request->validate([
-            'name' => ['required', 'max:255'],
-            'email' => ['nullable', 'email', 'max:255'],
+            'name' => ['required', 'unique:companies,name,'.$company->id, 'max:100'], //made it max 100 to stop it being too long.
+            'email' => ['nullable', 'unique:companies,email,'.$company->id, 'email', 'max:100'], //made it max 100 to stop it being too long.
             'logo' => ['nullable', 'max:255', 'mimes:jpeg,png,jpg,gif', 'dimensions:min_width=100,min_height=100', 'image'],
-            'website' => ['nullable', 'max:255'],
+            'website' => ['nullable', 'unique:companies,website,'.$company->id, 'max:100', new DomainName],
         ]);
-
 
         //2. If logo file has changed then update the filepath, delete the old file (if this exists), and save the new file
         if($request->logo) {
@@ -164,23 +164,31 @@ class CompanyController extends Controller
 
         //update the name if this has changed
         if($request->name) {
-            $company->name = $request->name;
+            $name = Str::lower($request->name);
+            $name = trim(strip_tags(ucwords($name)));
+            $company->name = $name;
         }
 
         //update the email if this has changed
         if($request->email) {
-            $company->email = $request->email;
+            $email = trim(strip_tags(Str::lower($request->email)));
+            $company->email = $email;
         }
 
         //update the website if this has changed
         if($request->website) {
-            $company->website = $request->website;
+            $website = str_replace("www.", " ", $request->website);
+            $website = trim(strip_tags(Str::lower($website)));
+            $company->website = $website;
         }
-        //$company->save();
+
+
+        //save the new details
         $company->update();
 
+        //Redirect to the companies page & display a flash message.
         return redirect()->route('companies')
-            ->with('success','Company updated successfully'); //this bit's not working, need to read flash message notes
+            ->with('success','Company updated successfully'); 
         //the above routed is named 'companies' so I don't need to write 'companies.index'
     }
 

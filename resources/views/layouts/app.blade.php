@@ -35,5 +35,19 @@
                 {{ $slot }}
             </main>
         </div>
+
+        <!-- flash messages -->
+        @if(session()->has('success'))
+            <div id="success-message" class="fixed bg-indigo-800 text-white py-2 px-4 rounded-xl bottom-3 right-3 text-sm transition duration-500">
+                <p>{{ session('success') }}</p>
+            </div>
+
+            <script>
+                const successMessage = document.querySelector('#success-message');
+                setTimeout(function(){
+                    successMessage.style.opacity="0";
+                }, 4000);
+            </script>
+        @endif
     </body>
 </html>

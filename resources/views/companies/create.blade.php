@@ -30,8 +30,11 @@
                                     name="name" 
                                     class="w-full" 
                                     required="required"
-                                    >
-                                    <br>
+                                >
+                                <br>
+                                @error('name')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <div class="my-2">
@@ -41,8 +44,11 @@
                                     name="email" 
                                     class="w-full" 
                                     pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-                                    >
-                                    <br>
+                                >
+                                <br>
+                                @error('email')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <div class="my-2">
@@ -50,15 +56,17 @@
                                 <br>
                                 <!-- this label acts as the button -->
                                 <!-- <label class="relative w-12 my-12 mb-20 py-2 px-2 bg-indigo-700 text-white text-center font-bold uppercase w-full h-full cursor-pointer"> -->
-                                    <input type="file" 
-                                        id="logo" 
-                                        name="logo" 
-                                        class="w-full"
-                                        
-                                    >
+                                <input type="file" 
+                                    id="logo" 
+                                    name="logo" 
+                                    class="w-full"  
+                                >
                                     
                                 <!-- Upload style="display:none" -->
                                 <!-- </label>     -->
+                                @error('logo')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <div class="my-2">
@@ -69,6 +77,9 @@
                                     class="w-full"
                                 >
                                 <br>
+                                @error('website')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
 
                         </fieldset>
