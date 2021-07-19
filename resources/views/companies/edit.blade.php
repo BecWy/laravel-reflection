@@ -39,7 +39,11 @@ use App\Http\Controllers\CompanyController;
                                     name="name" 
                                     class="w-full" 
                                     required="required"
-                                    value="{{$company->name}}"
+                                    @if(old('name'))
+                                        value="{{ old('name') }}";
+                                    @else
+                                        value="{{$company->name}}";
+                                    @endif
                                 >
                                 <br>
                                 @error('name')
@@ -54,7 +58,11 @@ use App\Http\Controllers\CompanyController;
                                     name="email" 
                                     class="w-full" 
                                     pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-                                    value="{{$company->email}}"
+                                    @if(old('email'))
+                                        value="{{ old('email') }}";
+                                    @else
+                                        value="{{$company->email}}";
+                                    @endif
                                 >
                                 <br>
                                 @error('email')
@@ -83,6 +91,11 @@ use App\Http\Controllers\CompanyController;
                                         name="logo" 
                                         class="w-full"
                                         style="display:none"
+                                        @if(old('logo'))
+                                            value="{{ old('logo') }}";
+                                        @else
+                                            value="{{$company->logo}}";
+                                        @endif
                                     >
                                     @error('logo')
                                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -97,7 +110,11 @@ use App\Http\Controllers\CompanyController;
                                     id="website" 
                                     name="website" 
                                     class="w-full"
-                                    value="{{$company->website}}"
+                                    @if(old('website'))
+                                        value="{{ old('website') }}";
+                                    @else
+                                        value="{{$company->website}}";
+                                    @endif
                                 >
                                 <br>
                                 @error('website')

@@ -30,6 +30,7 @@
                                     name="name" 
                                     class="w-full" 
                                     required="required"
+                                    value="{{ old('name') }}"
                                 >
                                 <br>
                                 @error('name')
@@ -44,6 +45,7 @@
                                     name="email" 
                                     class="w-full" 
                                     pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                                    value="{{ old('email') }}"
                                 >
                                 <br>
                                 @error('email')
@@ -60,6 +62,7 @@
                                     id="logo" 
                                     name="logo" 
                                     class="w-full"  
+                                    value="{{ old('logo') }}"
                                 >
                                     
                                 <!-- Upload style="display:none" -->
@@ -75,6 +78,7 @@
                                     id="website" 
                                     name="website" 
                                     class="w-full"
+                                    value="{{ old('website') }}"
                                 >
                                 <br>
                                 @error('website')
