@@ -9,7 +9,13 @@
 
             @auth
                 <form method="POST" 
+                        
                         action="/companies/{{$company->id}}/destroy" 
+                        
+                        <?php
+                        //action="{{ route('companies') }}"
+                        ?>
+
                         class="w-10/12" 
                         enctype="multipart/form-data"> 
                     @csrf

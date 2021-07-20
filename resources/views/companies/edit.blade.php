@@ -5,7 +5,6 @@
 
             <a onclick="hideEditModal()" class="absolute self-end px-4 py-2 text-lg cursor-pointer"><i class="fas fa-times"></i></a>
 
-            <!-- still need to add a way to identify the specific company in the action -->
             @auth
                 <form method="POST" 
                         action="/companies/{{$company->id}}/edit" 
@@ -74,12 +73,12 @@
                                     class="w-full"
                                     <?php
                                     // style="display:none"
-                                    // @if(old('logo'))
-                                    //     value="{{ old('logo') }}";
-                                    // @else
-                                    //     value="{{$company->logo}}";
-                                    // @endif
                                     ?>
+                                    @if(old('logo'))
+                                        value="{{ old('logo') }}";
+                                    @else
+                                        value="{{$company->logo}}";
+                                    @endif
                                 >
                                 @error('logo')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
