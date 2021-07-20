@@ -50,7 +50,7 @@ class CompanyController extends Controller
         $request->validate([
             'name' => ['required', 'unique:companies,name', 'max:100'], //made it max 100 to stop it being too long.
             'email' => ['nullable', 'unique:companies,email', 'email', 'max:100'], //made it max 100 to stop it being too long.
-            'logo' => ['nullable', 'max:255', 'mimes:jpeg,png,jpg,gif', 'unique:companies,logo', 'dimensions:min_width=100,min_height=100', 'image'],
+            'logo' => ['required', 'max:255', 'mimes:jpeg,png,jpg,gif', 'unique:companies,logo', 'dimensions:min_width=100,min_height=100', 'image'],
             'website' => ['nullable', 'unique:companies,website', 'max:100', new DomainName],
         ]);
  

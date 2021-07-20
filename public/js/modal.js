@@ -1,14 +1,14 @@
-const editModal = document.querySelector(".edit-modal");
+//const editModal = document.querySelector(".edit-modal");
 const createModal = document.querySelector(".create-modal");
 const deleteModal = document.querySelector(".delete-modal");
 const bodyVar = document.querySelector("body");
 
 
 //Show modals
-const showEditModal = () => {
-    editModal.style.display = "block";
-    disableScroll();
-}
+// const showEditModal = () => {
+//     editModal.style.display = "block";
+//     disableScroll();
+// }
 
 const showCreateModal = () => {
     createModal.style.display = "block";
@@ -22,10 +22,10 @@ const showDeleteModal = () => {
 
 
 //Hide modals
-const hideEditModal = () => {
-    editModal.style.display = "none";
-    enableScroll();
-}
+// const hideEditModal = () => {
+//     editModal.style.display = "none";
+//     enableScroll();
+// }
 
 const hideCreateModal = () => {
     createModal.style.display = "none";
