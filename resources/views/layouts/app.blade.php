@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="w-screen h-screen overflow-hidden">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,7 +19,8 @@
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
-    <body class="font-sans antialiased">
+
+    <body class="font-sans antialiased overflow-y-auto overflow-x-hidden w-screen h-screen">
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 
@@ -38,7 +39,7 @@
 
         <!-- flash messages -->
         @if(session()->has('success'))
-            <div id="success-message" class="fixed bg-indigo-800 text-white py-2 px-4 rounded-xl bottom-3 right-3 text-sm transition duration-500">
+            <div id="success-message" class="fixed bg-indigo-800 text-white py-2 px-4 rounded-xl bottom-3 right-7 text-sm transition duration-500">
                 <p>{{ session('success') }}</p>
             </div>
 
@@ -49,5 +50,9 @@
                 }, 4000);
             </script>
         @endif
+
+        <!-- my show modal script -->
+        <script src="{{ asset('js/modal.js') }}"></script>
+
     </body>
 </html>
