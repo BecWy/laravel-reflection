@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB; //needed for pagination
@@ -19,12 +20,13 @@ class CompanyController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-    public function index()
-    {       
-        return view('companies.index', [
-            'companies' => DB::table('companies')->orderby('name')->paginate(10)
-        ]);
 
+
+    public function index()
+    {
+        return view('companies.index', [
+            'companies' => Company::orderby('name')->paginate(10)
+        ]);
     }
 
     /**
@@ -45,12 +47,12 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //1. Validate Data
+        //1. Validate Data 'unique:companies,name,'.$company->id,
         $request->validate([
-            'name' => ['required', 'unique:companies,name', 'max:100'], //made it max 100 to stop it being too long.
-            'email' => ['nullable', 'unique:companies,email', 'email', 'max:100'], //made it max 100 to stop it being too long.
-            'logo' => ['required', 'max:255', 'mimes:jpeg,png,jpg,gif', 'unique:companies,logo', 'dimensions:min_width=100,min_height=100', 'image'],
-            'website' => ['nullable', 'unique:companies,website', 'max:100', new DomainName],
+            'name' => ['required', 'unique:companies,name,'.$request->id, 'max:100'], //made it max 100 to stop it being too long.
+            'email' => ['nullable', 'unique:companies,email,'.$request->id, 'email', 'max:100'], //made it max 100 to stop it being too long.
+            'logo' => ['required', 'max:255', 'mimes:jpeg,png,jpg,gif', 'unique:companies,logo,'.$request->id, 'dimensions:min_width=100,min_height=100', 'image'],
+            'website' => ['nullable', 'unique:companies,website,'.$request->id, 'max:100', new DomainName],
         ]);
  
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\Company;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB; //needed for pagination
@@ -19,12 +20,15 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
+
     public function index()
     {
         return view('employees.index', [
-            'employees' => DB::table('employees')->orderby('last_name')->paginate(10)
+            'employees' => Employee::orderby('last_name')->paginate(10)
         ]);
     }
+
 
     /**
      * Show the form for creating a new resource.

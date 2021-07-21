@@ -44,7 +44,7 @@ Route::get('companies', [CompanyController::class, 'index'])->middleware(['auth'
 Route::get('companies/create', [CompanyController::class, 'create']); //WORKS - goes to the companies create blade file (currently empty) 
 
 //Companies - store
-Route::post('companies/create', [CompanyController::class, 'store'])->name('companies.store');
+Route::post('companies/create', [CompanyController::class, 'store']);
 //->middleware(['auth'])->name('companies');
 
 
@@ -88,7 +88,7 @@ Route::get('employees', [EmployeeController::class, 'index'])->middleware(['auth
 Route::get('employees/create', [EmployeeController::class, 'create']);  
 
 //Employees - store
-Route::post('employees/create', [EmployeeController::class, 'store'])->name('employees.store');
+Route::post('employees/create', [EmployeeController::class, 'store']);
 //->middleware(['auth'])->name('employees');
 
 
