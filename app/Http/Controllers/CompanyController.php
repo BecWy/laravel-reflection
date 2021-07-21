@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use Illuminate\Http\Request;
 
-use App\Http\Controllers\Controller; //I added this to try and fix pagination
-use Illuminate\Support\Facades\DB; //I added this to try and fix pagination
+use Illuminate\Support\Facades\DB; //needed for pagination
 use Illuminate\Support\Facades\File; //needed to delete a file
 use Illuminate\Support\Str; //to use string helpers like to lower, uc words etc.
 use App\Rules\DomainName; //to use this custom validation rule
@@ -55,7 +54,7 @@ class CompanyController extends Controller
         ]);
  
 
-        //2. Save the uploaded file (if this exists)
+        //2. Save the uploaded file
         //Using the original file name for now. May return to working on a way to use the company name later.
         if($request->logo) {
             $request->file('logo')->storeAs('logos/', $request->logo->getClientOriginalName()); //saved with the original file name
@@ -111,7 +110,7 @@ class CompanyController extends Controller
     {
         //you would use this to show ONE company. Not needed for this project at the moment.
         //not sure what compact does - google
-        return view('companies.show',compact('company.'));
+        return view('companies.show',compact('company'));
     }
 
     /**
@@ -200,7 +199,7 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        //VALIDATE THE REQUEST?????????????????? Maybe add an are you sure? popup
+        //VALIDATE THE REQUEST??????????????????
         
         //delete the logo file from public/logos
         if(File::exists($company->logo)) {
@@ -224,38 +223,5 @@ class CompanyController extends Controller
         return view('companies.delete',compact('company'));
     }
 
-
-
-    //retrieve the logo
-    // public function getLogoAttribute()
-    // {
-    //     return $this->logo;
-    // }
-
-    //upload a logo
-    // public function uploadOne(UploadedFile $uploadedFile, $folder = null, $disk = 'public', $filename = null)
-    // {
-    //     $name = !is_null($filename) ? $filename : Str::random(25);
-
-    //     $file = $uploadedFile->storeAs($folder, $name.'.'.$uploadedFile->getClientOriginalExtension(), $disk);
-
-    //     return $file;
-    // }
-
-    //delete a logo - NOT WORKING. need an image controller???????????
-    // public function destroyLogo(Request $request)
-    // {
-    //     if(File::exists('logos/' . $request->logo )) {
-    //         File::delete('logos/' . $request->logo);
-    //     }
-    //     // else{
-    //     //     dd('File does not exists.');
-    //     // }
-
-    //     //update the logo file path to null
-    //     $company->logo = null;
-    //     $company->save();
-    //     $company->update();
-    // }
 
 }
