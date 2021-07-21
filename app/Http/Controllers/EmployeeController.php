@@ -55,7 +55,7 @@ class EmployeeController extends Controller
             //need to add company name here
             'email' => ['nullable', 'unique:employees,email', 'email', 'max:100'], //made it max 100 to stop it being too long.
             //may need to create my own phone validation rule???
-            'phone' => ['nullable', 'unique:employees,phone', 'phone', 'max:100']
+            'phone' => ['nullable', 'unique:employees,phone', 'max:100']
             
         ]);
 
@@ -141,7 +141,7 @@ class EmployeeController extends Controller
             //need to add company name here
             'email' => ['nullable', 'unique:employees,email', 'email', 'max:100'], //made it max 100 to stop it being too long.
             //may need to create my own phone validation rule???
-            'phone' => ['nullable', 'unique:employees,phone', 'phone', 'max:100']
+            'phone' => ['nullable', 'unique:employees,phone', 'max:100']
         
         ]);
 
