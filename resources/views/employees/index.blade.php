@@ -27,45 +27,6 @@ use App\Http\Controllers\EmployeeController;
         // @else
         ?>
 
-
-
-        <!-- /////////////////////////////////////////////////////////////////////
-        //EXPERIMENT - WORKING OUT HOW TO DISPLAY THE COMPANY NAMES IN A DROPDOWN ON CREATE/EDIT
-        //THIS BIT IS WORKING OUT HOW TO GET EACH ONE IN A LIST, ONCE PER COMPANY -->
-        <!-- //the array creation and sorting is working!!!!!!!!!!!!! -->
-        <ul>
-        <?php
-        $companyList = [];
-        ?>
-        @foreach($employees as $employee)
-            
-            
-            @if(!in_array($employee->company->name, $companyList))
-                
-                <?php
-                    $companyList[] = $employee->company->name;
-                    //echo $companyList;
-                ?>
-                
-                <li>{{$employee->company->name}}</li>
-            @endif
-           
-        @endforeach
-
-            <li>this is after the loop</li>
-        </ul>
-
-        <?php
-            asort($companyList);
-            foreach ($companyList as $company) {
-                echo "<li>$company</li>";
-            }
-        ?>
-        <!-- /////////////////////////////////////////////////////////////////////// -->
-       
-        
-        
-
             <table class="my-4 py-4 bg-white m-w-full w-full">
                 <tr>
                     <th class="bg-indigo-900 text-white tracking-wider font-semibold text-left px-4 py-2"></th>
@@ -103,18 +64,6 @@ use App\Http\Controllers\EmployeeController;
                         <td class="border px-4 py-2 align-top text-sm">{{$employee->first_name}}</td>
                         <td class="border px-4 py-2 align-top text-sm">{{$employee->last_name}}</td>
                         <td class="border px-4 py-2 align-top text-sm">{{$employee->company->name ?? ''}}</td>
-
-                        <!-- <td class="border px-4 py-2 align-top text-sm">
-                            //<?php
-                            
-                                //$company = Company::find($employee->company_id);
-                            //{{
-                                
-                                //$company->name;
-                            //}}
-                            // ?>
-                        </td> -->
-                        
                         <td class="border px-4 py-2 align-top text-sm">{{$employee->email;}}</td>
                         <td class="border px-4 py-2 align-top text-sm">{{$employee->phone;}}</td>
                         <td class="border px-4 py-2 align-top text-sm">
@@ -122,14 +71,10 @@ use App\Http\Controllers\EmployeeController;
                             <a href="/employees/{{$employee->id}}/delete" class="cursor-pointer"><i class="far fa-trash-alt"></i></a>
                         </td>
                     </tr>
-                @endforeach
 
-               
-        
+                @endforeach       
             </table>
-        <?php
-        //@endif
-        ?>
+
         </div>
 
         

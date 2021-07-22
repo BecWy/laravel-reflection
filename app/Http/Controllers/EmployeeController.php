@@ -37,7 +37,8 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        return view('employees.create');
+        $companies = Company::orderBy('name', 'asc')->get();
+        return view('employees.create')->with('companies', $companies);
     }
 
     /**
@@ -52,24 +53,26 @@ class EmployeeController extends Controller
         $request->validate([
             'first_name' => ['required', 'unique:employees,first_name', 'max:100'], //made it max 100 to stop it being too long.
             'last_name' => ['required', 'unique:employees,last_name', 'max:100'], //made it max 100 to stop it being too long.
-            //need to add company name here
+            'company_id' => ['required'],
             'email' => ['nullable', 'unique:employees,email', 'email', 'max:100'], //made it max 100 to stop it being too long.
             //may need to create my own phone validation rule???
             'phone' => ['nullable', 'unique:employees,phone', 'max:100']
-            
         ]);
 
         //2. sanitise and format input before it is saved
-        $first_name = Str::lower($request->first_name);
-        $first_name = trim(strip_tags(ucwords($first_name)));
-        
-        $last_name = Str::lower($request->last_name);
-        $last_name = trim(strip_tags(ucwords($last_name)));
-        
-        $company = Str::lower($request->company);
-        $company = trim(strip_tags(ucwords($company)));
+        // $first_name = Str::lower($request->first_name);
+        // $first_name = trim(strip_tags(ucwords($first_name)));
+        $first_name = $request->first_name;
 
-        $email = trim(strip_tags(Str::lower($request->email)));
+        // $last_name = Str::lower($request->last_name);
+        // $last_name = trim(strip_tags(ucwords($last_name)));
+        $last_name = $request->last_name;
+        
+        //$company = Str::lower($request->company);
+        //$company = trim(strip_tags(ucwords($company)));
+
+        //$email = trim(strip_tags(Str::lower($request->email)));
+        $email = $request->email;
         
         //need to look into this and update it
         $phone = $request->phone;
@@ -84,8 +87,9 @@ class EmployeeController extends Controller
             $newEmployee->email = $email;
         }
 
-        if($newEmployee->company) {
-            $newEmployee->company = $company;
+        if($newEmployee->company_id) {
+            //$newEmployee->company = $company;
+            $newEmployee->company_id = $request->company_id;
         }
 
         if($newEmployee->phone) {

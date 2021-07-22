@@ -1,7 +1,7 @@
 <x-crud-container>
 
     <x-slot name="title">
-        Companies
+        Employees
     </x-slot>
 
     <x-slot name="arrowlink">
@@ -21,28 +21,28 @@
 
                 <fieldset>
                     <div class="my-2">
-                        <label for="first-name" class="font-bold">First Name <span class="required">*</span></label><br>
+                        <label for="first_name" class="font-bold">First Name <span class="required">*</span></label><br>
                         <input type="text" 
-                            id="first-name" 
-                            name="first-name" 
+                            id="first_name" 
+                            name="first_name" 
                             class="w-full" 
                             required="required"
-                            value="{{ old('first-name') }}"
+                            value="{{ old('first_name') }}"
                         >
                         <br>
-                        @error('first-name')
+                        @error('first_name')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror
                     </div>
 
                     <div class="my-2">
-                        <label for="last-name" class="font-bold">Last Name <span class="required">*</span></label><br>
+                        <label for="last_name" class="font-bold">Last Name <span class="required">*</span></label><br>
                         <input type="text" 
-                            id="last-name" 
-                            name="last-name" 
+                            id="last_name" 
+                            name="last_name" 
                             class="w-full" 
                             required="required"
-                            value="{{ old('last-name') }}"
+                            value="{{ old('last_name') }}"
                         >
                         <br>
                         @error('name')
@@ -50,8 +50,26 @@
                         @enderror
                     </div>
 
-                    <!-- NEED TO ADD COMPANY -->
-                    <label for="company" class="font-bold text-red-500">Company <span class="required">*</span></label><br>
+
+                    <div class="my-2">
+                        <label for="company_id" class="font-bold text-red-500">Company <span class="required">*</span></label><br>
+                        <select
+                            id="company_id" 
+                            name="company_id" 
+                            class="w-full" 
+                            required="required"
+                            value="{{ old('company_id') }}"
+                        >
+                            @foreach($companies as $company)
+                                <option value="{{$company->id}}">{{$company->name}}</option>
+                            @endforeach
+                        </select>
+                        <br>
+                        @error('company')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
 
                     <div class="my-2">
                         <label for="email" class="font-bold">Email</label><br>
