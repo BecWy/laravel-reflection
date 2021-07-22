@@ -22,13 +22,13 @@
                 <fieldset>
                     <div class="my-2">
                         <label for="first_name" class="font-bold">First Name <span class="required">*</span></label><br>
-                        <input type="text" 
+                        <x-input {{$attributes}} type="text" 
                             id="first_name" 
                             name="first_name" 
                             class="w-full" 
                             required="required"
                             value="{{ old('first_name') }}"
-                        >
+                        />
                         <br>
                         @error('first_name')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>

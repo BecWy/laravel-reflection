@@ -60,16 +60,11 @@ class EmployeeController extends Controller
         ]);
 
         //2. sanitise and format input before it is saved
-        // $first_name = Str::lower($request->first_name);
-        // $first_name = trim(strip_tags(ucwords($first_name)));
-        $first_name = $request->first_name;
+        $first_name = Str::lower($request->first_name);
+        $first_name = trim(strip_tags(ucwords($first_name)));
 
-        // $last_name = Str::lower($request->last_name);
-        // $last_name = trim(strip_tags(ucwords($last_name)));
-        $last_name = $request->last_name;
-        
-        //$company = Str::lower($request->company);
-        //$company = trim(strip_tags(ucwords($company)));
+        $last_name = Str::lower($request->last_name);
+        $last_name = trim(strip_tags(ucwords($last_name)));
 
         //$email = trim(strip_tags(Str::lower($request->email)));
         $email = $request->email;
@@ -82,14 +77,10 @@ class EmployeeController extends Controller
         
         $newEmployee->first_name = $first_name;
         $newEmployee->last_name = $last_name;
+        //don't need to change the company_id at all so this doesn't need any additional code
 
         if($newEmployee->email) {
             $newEmployee->email = $email;
-        }
-
-        if($newEmployee->company_id) {
-            //$newEmployee->company = $company;
-            $newEmployee->company_id = $request->company_id;
         }
 
         if($newEmployee->phone) {
