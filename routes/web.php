@@ -41,30 +41,26 @@ Route::get('companies', [CompanyController::class, 'index'])->middleware(['auth'
 
 //Add a new company
 //Companies - create - display the form to create a new company
-Route::get('companies/create', [CompanyController::class, 'create']); //WORKS - goes to the companies create blade file (currently empty) 
+Route::get('companies/create', [CompanyController::class, 'create'])->middleware(['auth'])->name('companies.create'); 
 
 //Companies - store
-Route::post('companies/create', [CompanyController::class, 'store']);
-//->middleware(['auth'])->name('companies');
+Route::post('companies/create', [CompanyController::class, 'store'])->middleware(['auth'])->name('companies.store');
 
 
 //Edit an existing company
 //Companies - edit - display the edit form
-Route::get('companies/{company:id}/edit', [CompanyController::class, 'edit']); //WORKS - goes to the companies edit blade file (currently empty)
+Route::get('companies/{company:id}/edit', [CompanyController::class, 'edit'])->middleware(['auth']); 
 
 //Companies - update - save the changes from the edit
-Route::post('companies/{company:id}/edit', [CompanyController::class, 'update']);
-
-//Companies - delete a logo on the edit page
-//Route::post('companies/{company:id}/edit', [CompanyController::class, 'destroyLogo'])->name('companies.destroyLogo');
+Route::post('companies/{company:id}/edit', [CompanyController::class, 'update'])->middleware(['auth']);
 
 
 //Companies - destroy.
 //Takes you to a delete popup
-Route::get('companies/{company:id}/delete', [CompanyController::class, 'delete']);
+Route::get('companies/{company:id}/delete', [CompanyController::class, 'delete'])->middleware(['auth'])->name('companies.delete');
 
 //deletes the record 
-Route::post('companies/{company:id}/destroy', [CompanyController::class, 'destroy']);
+Route::post('companies/{company:id}/destroy', [CompanyController::class, 'destroy'])->middleware(['auth'])->name('companies.destroy');
 
 
 
@@ -85,25 +81,25 @@ Route::get('employees', [EmployeeController::class, 'index'])->middleware(['auth
 
 //Add a new employee
 //Employees - create - display the form to create a new employee
-Route::get('employees/create', [EmployeeController::class, 'create']);  
+Route::get('employees/create', [EmployeeController::class, 'create'])->middleware(['auth']);  
 
 //Employees - store
-Route::post('employees/create', [EmployeeController::class, 'store']);
+Route::post('employees/create', [EmployeeController::class, 'store'])->middleware(['auth']);
 //->middleware(['auth'])->name('employees');
 
 
 //Edit an existing employee
 //Employees - edit - display the edit form
-Route::get('employees/{employee:id}/edit', [EmployeeController::class, 'edit']);
+Route::get('employees/{employee:id}/edit', [EmployeeController::class, 'edit'])->middleware(['auth']);
 
 //Employees - update - save the changes from the edit
-Route::post('employees/{employee:id}/edit', [EmployeeController::class, 'update']);
+Route::post('employees/{employee:id}/edit', [EmployeeController::class, 'update'])->middleware(['auth']);
 
 
 //Employees - destroy.
 //Takes you to a delete popup
-Route::get('employees/{employee:id}/delete', [EmployeeController::class, 'delete']);
+Route::get('employees/{employee:id}/delete', [EmployeeController::class, 'delete'])->middleware(['auth']);
 
 //deletes the record 
-Route::post('employees/{employee:id}/destroy', [EmployeeController::class, 'destroy']);
+Route::post('employees/{employee:id}/destroy', [EmployeeController::class, 'destroy'])->middleware(['auth']);
 

@@ -5,7 +5,7 @@
     </x-slot>
 
     <x-slot name="arrowlink">
-        "/companies"
+        "{{ route('companies') }}"
     </x-slot>
 
     <x-slot name="content">
@@ -86,11 +86,11 @@
                 </fieldset>
 
                 <div id="button-div" class="flex flex-row items-center justify-center my-4 mt-8 text-white text-center">
-                    <button type="submit" id="submit-button" class="bg-indigo-700 font-bold uppercase w-6/12 h-full py-3 mr-2"> 
+                    <button type="submit" id="submit-button" class="bg-indigo-800 font-bold uppercase w-6/12 h-full py-3 mr-2"> 
                         Create
                     </button>
 
-                    <a href="/companies" class="bg-indigo-700 font-bold uppercase w-6/12 h-full py-3 ml-2"> 
+                    <a href="{{ route('companies') }}" class="bg-indigo-800 font-bold uppercase w-6/12 h-full py-3 ml-2"> 
                         Cancel
                     </a>
                 </div>

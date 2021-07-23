@@ -144,16 +144,11 @@ class CompanyController extends Controller
         $request->validate([
             'name' => ['required', 'unique:companies,name,'.$company->id, 'max:100'], //made it max 100 to stop it being too long.
             'email' => ['nullable', 'unique:companies,email,'.$company->id, 'email', 'max:100'], //made it max 100 to stop it being too long.
-            'logo' => ['required', 'file', 'mimes:jpeg,png,jpg,gif', 'unique:companies,logo,'.$company->id, 'dimensions:min_width=100,min_height=100', 'image', new FileUnique],
+            'logo' => ['nullable', 'file', 'mimes:jpeg,png,jpg,gif', 'unique:companies,logo,'.$company->id, 'dimensions:min_width=100,min_height=100', 'image', new FileUnique],
             'website' => ['nullable', 'unique:companies,website,'.$company->id, 'max:100', new DomainName],
         ]);
 
-        // $requestedLogo = $request->logo;
-        // $requestedLogoFileName = $requestedLogo->getClientOriginalName();
-        // $requestedLogoFilePath = 'logos/' . $requestedLogofileName;
-
-        
-
+     
         //2. If logo file has changed then update the filepath, delete the old file (if this exists), and save the new file
         //need to make sure that the filename is unique before deleting the original file.
         if($request->logo) {

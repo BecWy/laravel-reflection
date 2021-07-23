@@ -9,7 +9,7 @@
 
     <div class="mx-auto m-w-full">
         <div class="flex flex-row items-end justify-end">
-            <a href="/companies/create" class="text-3xl cursor-pointer text-indigo-900" p-1><i class="far fa-plus-square"></i></a>
+            <a href="/companies/create" class="text-3xl cursor-pointer text-indigo-800" p-1><i class="far fa-plus-square"></i></a>
         </div>
 
         <div class="overflow-x-auto md:overflow-x-hidden w-full mb-4 mt-2">
@@ -22,12 +22,12 @@
 
             <table class="my-4 py-4 bg-white m-w-full w-full">
                 <tr>
-                    <th class="bg-indigo-900 text-white tracking-wider font-semibold text-left px-4 py-2"></th>
-                    <th class="bg-indigo-900 text-white tracking-wider font-semibold text-left px-4 py-2">Name</th>
-                    <th class="bg-indigo-900 text-white tracking-wider font-semibold text-left px-4 py-2">Email</th>
-                    <th class="bg-indigo-900 text-white tracking-wider font-semibold text-left px-4 py-2">Logo</th>
-                    <th class="bg-indigo-900 text-white tracking-wider font-semibold text-left px-4 py-2">Website</th>
-                    <th class="bg-indigo-900 text-white tracking-wider font-semibold text-left px-4 py-2">Actions</th>
+                    <th class="bg-indigo-800 text-white tracking-wider font-semibold text-left px-4 py-2"></th>
+                    <th class="bg-indigo-800 text-white tracking-wider font-semibold text-left px-4 py-2">Name</th>
+                    <th class="bg-indigo-800 text-white tracking-wider font-semibold text-left px-4 py-2">Email</th>
+                    <th class="bg-indigo-800 text-white tracking-wider font-semibold text-left px-4 py-2">Logo</th>
+                    <th class="bg-indigo-800 text-white tracking-wider font-semibold text-left px-4 py-2">Website</th>
+                    <th class="bg-indigo-800 text-white tracking-wider font-semibold text-left px-4 py-2">Actions</th>
                 </tr>
                 
 

@@ -36,15 +36,6 @@ class FileUnique implements Rule
         } else {
             return true;
         }
-        
-        //$url = Storage::url($filename);
-        //$url = Storage::url('test-logo-1');
-        
-        // if ($url != null ) {
-        //     return false;
-        // } else {
-        //     return true;
-        // }
     }
 
     /**
@@ -54,6 +45,6 @@ class FileUnique implements Rule
      */
     public function message()
     {
-        return 'A file with that name already exists. Please upload a file with a different name.';
+        return 'A logo with that name already exists. Please upload a file with a different name.';
     }
 }

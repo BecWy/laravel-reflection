@@ -12,7 +12,7 @@
             <div class="flex flex-col items-center   border bg-white my-4 mx-4" >
                 <h2 class="text-lg font-bold my-4">Delete Logo?</h2>
 
-                <a href="/companies" class="absolute self-end px-4 py-2 text-lg"><i class="fas fa-times"></i></a>
+                <a href="{{ route('companies') }}" class="absolute self-end px-4 py-2 text-lg"><i class="fas fa-times"></i></a>
 
                 @auth
                     <form method="POST" 
@@ -26,7 +26,7 @@
 
                         <!-- <button type="button" class="cancelbtn">Cancel</button> -->
 
-                        <div id="button-div" class="my-4 mt-8 bg-indigo-700 text-white text-center">
+                        <div id="button-div" class="my-4 mt-8 bg-indigo-800 text-white text-center">
                             <button type="submit" id="submit-button" class="font-bold uppercase w-full h-full py-3"> 
                                 Delete
                             </button>
