@@ -14,23 +14,21 @@
         @auth
             <form method="POST" 
                     action="/employees/{{$employee->id}}/edit" 
-                    class="w-full" 
+                    class="w-10/12" 
+                    role="form"
                     enctype="multipart/form-data"> 
                 @csrf
 
                 <fieldset>
                     <div class="my-2">
                         <label for="first_name" class="font-bold">First Name <span class="required">*</span></label><br>
-                        <input type="text" 
+                        <input
+                            type="text" 
                             id="first_name" 
                             name="first_name" 
-                            class="w-full" 
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" 
                             required="required"
-                            @if(old('first_name'))
-                                value="{{ old('first_name') }}";
-                            @else
-                                value="{{$employee->first_name}}";
-                            @endif
+                            value = "{{ old('first_name') ? old('first_name') : $employee->first_name }}"
                         >
                         <br>
                         @error('first_name')
@@ -40,16 +38,13 @@
 
                     <div class="my-2">
                         <label for="last_name" class="font-bold">Last Name <span class="required">*</span></label><br>
-                        <input type="text" 
+                        <input
+                            type="text" 
                             id="last_name" 
                             name="last_name" 
-                            class="w-full" 
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" 
                             required="required"
-                            @if(old('last_name'))
-                                value="{{ old('last_name') }}";
-                            @else
-                                value="{{$employee->last_name}}";
-                            @endif
+                            value = "{{ old('last_name') ? old('last_name') : $employee->last_name }}"
                         >
                         <br>
                         @error('last_name')
@@ -57,21 +52,46 @@
                         @enderror
                     </div>
 
-                    <!-- NEED TO ADD COMPANY -->
-                    <label for="company" class="font-bold text-red-500">Company <span class="required">*</span></label><br>
+                    <div class="my-2">
+                        <label for="company_id" class="font-bold text-red-500">Company <span class="required">*</span></label><br>
+                        <select
+                            id="company_id" 
+                            name="company_id" 
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" 
+                            required="required"
+                            value = "{{ old('company_id') ? old('company_id') : $employee->company_id }}"
+                        >
+                            @foreach($companies as $company)
+                                <option value="{{$company->id}}"
+                                    @if ($company->id == old('company_id'))
+                                        selected="selected"
+                                    @elseif (!old('company_id') && $company->id == $employee->company_id) 
+                                        selected="selected"
+                                    @endif
+                                >{{$company->name}}</option>
+                            @endforeach
+
+
+                            <!-- @foreach($companies as $company)
+                                <option value="//{{$company->id}}">//{{$company->name}}</option>
+                            @endforeach -->
+
+                        </select>
+                        <br>
+                        @error('company')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
 
                     <div class="my-2">
                         <label for="email" class="font-bold">Email</label><br>
-                        <input type="email" 
+                        <input
+                            type="email" 
                             id="email" 
                             name="email" 
-                            class="w-full" 
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" 
                             pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-                            @if(old('email'))
-                                value="{{ old('email') }}";
-                            @else
-                                value="{{$employee->email}}";
-                            @endif
+                            value = "{{ old('email') ? old('email') : $employee->email }}"
                         >
                         <br>
                         @error('email')
@@ -81,15 +101,12 @@
 
                     <div class="my-2">
                         <label for="phone" class="font-bold">Phone</label><br>
-                        <input type="tel" 
+                        <input
+                            type="tel" 
                             id="phone" 
                             name="phone" 
-                            class="w-full"
-                            @if(old('phone'))
-                                value="{{ old('phone') }}";
-                            @else
-                                value="{{$employee->phone}}";
-                            @endif
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            value = "{{ old('phone') ? old('phone') : $employee->phone }}"
                         >
                         <br>
                         @error('phone')

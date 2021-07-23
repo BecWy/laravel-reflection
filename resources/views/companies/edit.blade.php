@@ -14,23 +14,21 @@
         @auth
             <form method="POST" 
                     action="/companies/{{$company->id}}/edit" 
-                    class="w-full" 
+                    class="w-10/12" 
+                    role="form"
                     enctype="multipart/form-data"> 
                 @csrf
 
                 <fieldset>
                     <div class="my-2">
                         <label for="name" class="font-bold">Name <span class="required">*</span></label><br>
-                        <input type="text" 
+                        <input
+                            type="text" 
                             id="name" 
                             name="name" 
-                            class="w-full" 
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" 
                             required="required"
-                            @if(old('name'))
-                                value="{{ old('name') }}";
-                            @else
-                                value="{{$company->name}}";
-                            @endif
+                            value = "{{ old('name') ? old('name') : $company->name }}" 
                         >
                         <br>
                         @error('name')
@@ -43,13 +41,9 @@
                         <input type="email" 
                             id="email" 
                             name="email" 
-                            class="w-full" 
-                            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-                            @if(old('email'))
-                                value="{{ old('email') }}";
-                            @else
-                                value="{{$company->email}}";
-                            @endif
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" 
+                            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" 
+                            value = "{{ old('email') ? old('email') : $company->email }}" 
                         >
                         <br>
                         @error('email')
@@ -80,11 +74,7 @@
                                 <?php
                                 // style="display:none"
                                 ?>
-                                @if(old('logo'))
-                                    value="{{ old('logo') }}";
-                                @else
-                                    value="{{$company->logo}}";
-                                @endif
+                                value = "{{ old('logo') ? old('logo') : $company->logo }}" 
                             >
                             @error('logo')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -98,12 +88,8 @@
                         <input type="text" 
                             id="website" 
                             name="website" 
-                            class="w-full"
-                            @if(old('website'))
-                                value="{{ old('website') }}";
-                            @else
-                                value="{{$company->website}}";
-                            @endif
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            value = "{{ old('website') ? old('website') : $company->website }}" 
                         >
                         <br>
                         @error('website')

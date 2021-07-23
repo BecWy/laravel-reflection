@@ -22,13 +22,14 @@
                 <fieldset>
                     <div class="my-2">
                         <label for="name" class="font-bold">Name <span class="required">*</span></label><br>
-                        <input type="text" 
+                        <x-input :disabled="false"
+                            type="text" 
                             id="name" 
                             name="name" 
                             class="w-full" 
                             required="required"
                             value="{{ old('name') }}"
-                        >
+                        />
                         <br>
                         @error('name')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -37,13 +38,14 @@
 
                     <div class="my-2">
                         <label for="email" class="font-bold">Email</label><br>
-                        <input type="email" 
+                        <x-input :disabled="false" 
+                            type="email" 
                             id="email" 
                             name="email" 
                             class="w-full" 
                             pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
                             value="{{ old('email') }}"
-                        >
+                        />
                         <br>
                         @error('email')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -53,7 +55,8 @@
                     <div class="my-2">
                         <label for="logo" class="font-bold">Logo</label><br>
                         <br>
-                        <input type="file" 
+                        <input 
+                            type="file" 
                             id="logo" 
                             name="logo" 
                             class="w-full"  
@@ -67,12 +70,13 @@
 
                     <div class="my-2">
                         <label for="website" class="font-bold">Website Domain <span class="text-sm font-normal">(example.com)</span></label><br>
-                        <input type="text" 
+                        <x-input :disabled="false" 
+                            type="text" 
                             id="website" 
                             name="website" 
                             class="w-full"
                             value="{{ old('website') }}"
-                        >
+                        />
                         <br>
                         @error('website')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>

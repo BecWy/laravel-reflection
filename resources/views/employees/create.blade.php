@@ -22,7 +22,8 @@
                 <fieldset>
                     <div class="my-2">
                         <label for="first_name" class="font-bold">First Name <span class="required">*</span></label><br>
-                        <x-input {{$attributes}} type="text" 
+                        <x-input :disabled="false"  
+                            type="text" 
                             id="first_name" 
                             name="first_name" 
                             class="w-full" 
@@ -37,13 +38,14 @@
 
                     <div class="my-2">
                         <label for="last_name" class="font-bold">Last Name <span class="required">*</span></label><br>
-                        <input type="text" 
+                        <x-input :disabled="false" 
+                            type="text" 
                             id="last_name" 
                             name="last_name" 
                             class="w-full" 
                             required="required"
                             value="{{ old('last_name') }}"
-                        >
+                        />
                         <br>
                         @error('name')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -56,7 +58,7 @@
                         <select
                             id="company_id" 
                             name="company_id" 
-                            class="w-full" 
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" 
                             required="required"
                             value="{{ old('company_id') }}"
                         >
@@ -73,13 +75,14 @@
 
                     <div class="my-2">
                         <label for="email" class="font-bold">Email</label><br>
-                        <input type="email" 
+                        <x-input :disabled="false" 
+                            type="email" 
                             id="email" 
                             name="email" 
                             class="w-full" 
                             pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
                             value="{{ old('email') }}"
-                        >
+                        />
                         <br>
                         @error('email')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -88,12 +91,13 @@
 
                     <div class="my-2">
                         <label for="phone" class="font-bold">Phone</label><br>
-                        <input type="tel" 
+                        <x-input :disabled="false" 
+                            type="tel" 
                             id="phone" 
                             name="phone" 
                             class="w-full"
                             value="{{ old('phone') }}"
-                        >
+                        />
                         <br>
                         @error('phone')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>

@@ -117,7 +117,8 @@ class EmployeeController extends Controller
     public function edit(Employee $employee)
     {
         //display the edit form. Compact is necessary here -it won't work without it.
-        return view('employees.edit',compact('employee'));
+        $companies = Company::orderBy('name', 'asc')->get();
+        return view('employees.edit',compact('employee'))->with('companies', $companies);
     }
 
     /**
