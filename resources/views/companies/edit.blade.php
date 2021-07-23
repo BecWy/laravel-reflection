@@ -56,31 +56,17 @@
                         @if($company->logo)
                             <p>Current file:</p>
                             <p>{{$company->logo}}</p>
-
-                            <!-- //need to change this to a button and set the formaction -->
-                            <!-- <a href=" route('companies.destroyLogo') "><p id="delete-logo" class="cursor-pointer">Delete Current File</p></a> -->
-                            <!-- <a href="/companies/delete-logo" id="submit-button" class="font-bold uppercase w-full h-full py-3"> 
-                                Delete Logo
-                            </a> -->
-
                         @endif
                         <br>
-                        <!-- this label acts as the button -->
-                        <!-- <label class="relative w-12 my-12 mb-20 py-2 px-2 bg-indigo-700 text-white text-center font-bold uppercase w-full h-full cursor-pointer"> -->
                             <input type="file" 
                                 id="logo" 
                                 name="logo" 
                                 class="w-full"
-                                <?php
-                                // style="display:none"
-                                ?>
                                 value = "{{ old('logo') ? old('logo') : $company->logo }}" 
                             >
                             @error('logo')
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                             @enderror
-                        <!-- Upload -->
-                        <!-- </label>     -->
                     </div>
 
                     <div class="my-2">

@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB; //needed for pagination
 use Illuminate\Support\Facades\File; //needed to delete a file
 use Illuminate\Support\Str; //to use string helpers like to lower, uc words etc.
-//use App\Rules\DomainName; //to use this custom validation rule
+use App\Rules\Phone; //to use this custom validation rule
 
 
 
@@ -54,9 +54,9 @@ class EmployeeController extends Controller
             'first_name' => ['required', 'max:100'], //made it max 100 to stop it being too long.
             'last_name' => ['required', 'max:100'], //made it max 100 to stop it being too long.
             'company_id' => ['required'],
-            'email' => ['nullable', 'unique:employees,email,'.$employee->id, 'email', 'max:100'], //made it max 100 to stop it being too long.
+            'email' => ['nullable', 'unique:employees,email', 'email', 'max:100'], //made it max 100 to stop it being too long.
             //may need to create my own phone validation rule???
-            'phone' => ['nullable', 'unique:employees,phone,'.$employee->id, 'max:100']
+            'phone' => ['nullable', 'unique:employees,phone', 'max:100', new Phone]
         ]);
 
         //2. sanitise and format input before it is saved
@@ -137,7 +137,7 @@ class EmployeeController extends Controller
             'company_id' => ['required'],
             'email' => ['nullable', 'unique:employees,email,'.$employee->id, 'email', 'max:100'], //made it max 100 to stop it being too long.
             //may need to create my own phone validation rule???
-            'phone' => ['nullable', 'unique:employees,phone,'.$employee->id, 'max:100']
+            'phone' => ['nullable', 'unique:employees,phone,'.$employee->id, 'max:100', new Phone]
         
         ]);
 
@@ -155,10 +155,11 @@ class EmployeeController extends Controller
             $employee->last_name = $last_name;
         }
 
-        //save the currently selected company
-        $employee->company_id = $request->company_id;
+        //save the currently selected company if this has changed
+        if($request->company_id) {
+            $employee->company_id = $request->company_id;
+        }
         
-
         //update the email if this has changed
         if($request->email) {
             $email = trim(strip_tags(Str::lower($request->email)));

@@ -54,7 +54,7 @@
 
 
                     <div class="my-2">
-                        <label for="company_id" class="font-bold text-red-500">Company <span class="required">*</span></label><br>
+                        <label for="company_id" class="font-bold">Company <span class="required">*</span></label><br>
                         <select
                             id="company_id" 
                             name="company_id" 
@@ -62,9 +62,16 @@
                             required="required"
                             value="{{ old('company_id') }}"
                         >
+                            <option selected="true" value="" style="display:none">Please select a company</option>
+                        
                             @foreach($companies as $company)
-                                <option value="{{$company->id}}">{{$company->name}}</option>
+                                <option value="{{$company->id}}"
+                                    @if ($company->id == old('company_id'))
+                                        selected="selected"
+                                    @endif
+                                >{{$company->name}}</option>
                             @endforeach
+
                         </select>
                         <br>
                         @error('company')

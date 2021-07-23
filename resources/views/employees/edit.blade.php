@@ -53,7 +53,7 @@
                     </div>
 
                     <div class="my-2">
-                        <label for="company_id" class="font-bold text-red-500">Company <span class="required">*</span></label><br>
+                        <label for="company_id" class="font-bold">Company <span class="required">*</span></label><br>
                         <select
                             id="company_id" 
                             name="company_id" 
@@ -61,6 +61,7 @@
                             required="required"
                             value = "{{ old('company_id') ? old('company_id') : $employee->company_id }}"
                         >
+
                             @foreach($companies as $company)
                                 <option value="{{$company->id}}"
                                     @if ($company->id == old('company_id'))

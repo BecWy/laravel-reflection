@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB; //needed for pagination
 use Illuminate\Support\Facades\File; //needed to delete a file
 use Illuminate\Support\Str; //to use string helpers like to lower, uc words etc.
 use App\Rules\DomainName; //to use this custom validation rule
+use App\Rules\FileUnique; //to use this custom validation rule
 
 
 class CompanyController extends Controller
@@ -51,7 +52,7 @@ class CompanyController extends Controller
         $request->validate([
             'name' => ['required', 'unique:companies,name,'.$request->id, 'max:100'], //made it max 100 to stop it being too long.
             'email' => ['nullable', 'unique:companies,email,'.$request->id, 'email', 'max:100'], //made it max 100 to stop it being too long.
-            'logo' => ['required', 'max:255', 'mimes:jpeg,png,jpg,gif', 'unique:companies,logo,'.$request->id, 'dimensions:min_width=100,min_height=100', 'image'],
+            'logo' => ['required', 'mimes:jpeg,png,jpg,gif', 'unique:companies,logo,'.$request->id, 'dimensions:min_width=100,min_height=100', 'image', new FileUnique],
             'website' => ['nullable', 'unique:companies,website,'.$request->id, 'max:100', new DomainName],
         ]);
  
@@ -143,11 +144,18 @@ class CompanyController extends Controller
         $request->validate([
             'name' => ['required', 'unique:companies,name,'.$company->id, 'max:100'], //made it max 100 to stop it being too long.
             'email' => ['nullable', 'unique:companies,email,'.$company->id, 'email', 'max:100'], //made it max 100 to stop it being too long.
-            'logo' => ['nullable', 'max:255', 'mimes:jpeg,png,jpg,gif', 'unique:companies,logo,'.$company->id, 'dimensions:min_width=100,min_height=100', 'image'],
+            'logo' => ['required', 'file', 'mimes:jpeg,png,jpg,gif', 'unique:companies,logo,'.$company->id, 'dimensions:min_width=100,min_height=100', 'image', new FileUnique],
             'website' => ['nullable', 'unique:companies,website,'.$company->id, 'max:100', new DomainName],
         ]);
 
+        // $requestedLogo = $request->logo;
+        // $requestedLogoFileName = $requestedLogo->getClientOriginalName();
+        // $requestedLogoFilePath = 'logos/' . $requestedLogofileName;
+
+        
+
         //2. If logo file has changed then update the filepath, delete the old file (if this exists), and save the new file
+        //need to make sure that the filename is unique before deleting the original file.
         if($request->logo) {
             $fileName = $request->logo->getClientOriginalName();
             $filePath = 'logos/' . $fileName;
