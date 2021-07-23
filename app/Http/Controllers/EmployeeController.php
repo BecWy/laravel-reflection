@@ -155,12 +155,9 @@ class EmployeeController extends Controller
             $employee->last_name = $last_name;
         }
 
-        //update the company name if this has changed
-        if($request->company) {
-            $company = Str::lower($request->company);
-            $company = trim(strip_tags(ucwords($company)));
-            $employee->company = $company;
-        }
+        //save the currently selected company
+        $employee->company_id = $request->company_id;
+        
 
         //update the email if this has changed
         if($request->email) {
