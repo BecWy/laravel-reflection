@@ -71,11 +71,6 @@
                                 >{{$company->name}}</option>
                             @endforeach
 
-
-                            <!-- @foreach($companies as $company)
-                                <option value="//{{$company->id}}">//{{$company->name}}</option>
-                            @endforeach -->
-
                         </select>
                         <br>
                         @error('company')

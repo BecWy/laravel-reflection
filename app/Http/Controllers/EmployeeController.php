@@ -51,12 +51,12 @@ class EmployeeController extends Controller
     {
         //1. Validate Data
         $request->validate([
-            'first_name' => ['required', 'unique:employees,first_name', 'max:100'], //made it max 100 to stop it being too long.
-            'last_name' => ['required', 'unique:employees,last_name', 'max:100'], //made it max 100 to stop it being too long.
+            'first_name' => ['required', 'max:100'], //made it max 100 to stop it being too long.
+            'last_name' => ['required', 'max:100'], //made it max 100 to stop it being too long.
             'company_id' => ['required'],
-            'email' => ['nullable', 'unique:employees,email', 'email', 'max:100'], //made it max 100 to stop it being too long.
+            'email' => ['nullable', 'unique:employees,email,'.$employee->id, 'email', 'max:100'], //made it max 100 to stop it being too long.
             //may need to create my own phone validation rule???
-            'phone' => ['nullable', 'unique:employees,phone', 'max:100']
+            'phone' => ['nullable', 'unique:employees,phone,'.$employee->id, 'max:100']
         ]);
 
         //2. sanitise and format input before it is saved
@@ -132,12 +132,12 @@ class EmployeeController extends Controller
     {
         //1. Validate Data
         $request->validate([
-            'first_name' => ['required', 'unique:employees,first_name', 'max:100'], //made it max 100 to stop it being too long.
-            'last_name' => ['required', 'unique:employees,last_name', 'max:100'], //made it max 100 to stop it being too long.
-            //need to add company name here
-            'email' => ['nullable', 'unique:employees,email', 'email', 'max:100'], //made it max 100 to stop it being too long.
+            'first_name' => ['required', 'max:100'], //made it max 100 to stop it being too long.
+            'last_name' => ['required', 'max:100'], //made it max 100 to stop it being too long.
+            'company_id' => ['required'],
+            'email' => ['nullable', 'unique:employees,email,'.$employee->id, 'email', 'max:100'], //made it max 100 to stop it being too long.
             //may need to create my own phone validation rule???
-            'phone' => ['nullable', 'unique:employees,phone', 'max:100']
+            'phone' => ['nullable', 'unique:employees,phone,'.$employee->id, 'max:100']
         
         ]);
 
@@ -145,7 +145,7 @@ class EmployeeController extends Controller
         //update the name if this has changed
         if($request->first_name) {
             $first_name = Str::lower($request->first_name);
-            $first_name = trim(strip_tags(ucwords($name)));
+            $first_name = trim(strip_tags(ucwords($first_name)));
             $employee->first_name = $first_name;
         }
 
