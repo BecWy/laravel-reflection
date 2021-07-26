@@ -1,3 +1,5 @@
+@auth
+
 <x-crud-container>
 
     <x-slot name="title">
@@ -5,13 +7,12 @@
     </x-slot>
 
     <x-slot name="arrowlink">
-        "/employees"
+        "{{ route('employees') }}"
     </x-slot>
 
     <x-slot name="content">
         <h2 class="text-lg font-bold mb-4">Create Employee</h2>
 
-        @auth
             <form method="POST" 
                     action="{{ route('employees.store') }}" 
                     class="w-10/12" 
@@ -124,7 +125,8 @@
                 </div>
 
             </form>
-        @endauth
 
     </x-slot>
 </x-crud-container>
+
+@endauth

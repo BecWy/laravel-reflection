@@ -1,3 +1,5 @@
+@auth
+
 <x-crud-container>
 
     <x-slot name="title">
@@ -11,7 +13,6 @@
     <x-slot name="content">
         <h2 class="text-lg font-bold mb-4">Edit Employee</h2>
 
-        @auth
             <form method="POST" 
                     action="/employees/{{$employee->id}}/edit" 
                     class="w-10/12" 
@@ -123,7 +124,8 @@
                 </div>
 
             </form>
-        @endauth
 
     </x-slot>
 </x-crud-container>
+
+@endauth

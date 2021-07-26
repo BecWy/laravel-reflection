@@ -191,9 +191,13 @@ class CompanyController extends Controller
         $company->update();
 
         //Redirect to the companies page & display a flash message.
-        return redirect()->route('companies')
+        // return redirect()->route('companies')
+        //     ->with('success','Company updated successfully'); 
+        //the above route is named 'companies' so I don't need to write 'companies.index'
+
+        return redirect()->route('companies', ['company' => $company])
             ->with('success','Company updated successfully'); 
-        //the above routed is named 'companies' so I don't need to write 'companies.index'
+
     }
 
     /**

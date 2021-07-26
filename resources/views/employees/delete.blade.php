@@ -1,3 +1,5 @@
+@auth
+
 <x-crud-container>
 
     <x-slot name="title">
@@ -8,11 +10,9 @@
         "{{ route('employees') }}"
     </x-slot>
 
-
     <x-slot name="content">
         <h2 class="text-lg font-bold mb-4">Delete Employee</h2>
 
-        @auth
             <form method="POST" 
                     
                     action="/employees/{{$employee->id}}/destroy" 
@@ -33,8 +33,8 @@
                 </div>
 
             </form>
-        @endauth
-
-
+    
     </x-slot>
 </x-crud-container>
+
+@endauth

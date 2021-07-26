@@ -1,3 +1,5 @@
+@auth
+
 <x-crud-container>
 
     <x-slot name="title">
@@ -11,7 +13,6 @@
     <x-slot name="content">
         <h2 class="text-lg font-bold mb-4">Create Company</h2>
 
-        @auth
             <form method="POST" 
                     action="{{ route('companies.store') }}" 
                     class="w-10/12" 
@@ -96,6 +97,7 @@
                 </div>
 
             </form>
-        @endauth
     </x-slot>
 </x-crud-container>
+
+@endauth

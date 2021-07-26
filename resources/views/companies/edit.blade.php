@@ -1,3 +1,5 @@
+@auth
+
 <x-crud-container>
     
     <x-slot name="title">
@@ -5,13 +7,12 @@
     </x-slot>
 
     <x-slot name="arrowlink">
-        "/companies"
+        "{{ route('companies') }}"
     </x-slot>
 
     <x-slot name="content">
         <h2 class="text-lg font-bold mb-4">Edit Company</h2>
-            
-        @auth
+       
             <form method="POST" 
                     action="/companies/{{$company->id}}/edit" 
                     class="w-10/12" 
@@ -90,13 +91,14 @@
                         Update
                     </button>
 
-                    <a href="/companies" class="bg-indigo-800 font-bold uppercase w-6/12 h-full py-3 ml-2"> 
+                    <a href="{{ route('companies') }}" class="bg-indigo-800 font-bold uppercase w-6/12 h-full py-3 ml-2"> 
                         Cancel
                     </a>
                 </div>
 
             </form>
-        @endauth
 
     </x-slot>
 </x-crud-container>
+
+@endauth
