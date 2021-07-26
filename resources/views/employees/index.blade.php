@@ -20,17 +20,20 @@ use App\Http\Controllers\EmployeeController;
                 <select
                     id="company" 
                     name="company" 
-                    class="w-5/12 rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" 
-                >
-                    @foreach($companies as $company)
-                        <option value="{{$company->id}}">
-                            {{$company->name}}
-                        </option>
-                    @endforeach
+                    class="w-5/12 rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"                  
+                    value = "{{ old('company_id') ? old('company_id') : null }}"
+                    >
+                        @foreach($companies as $company)
+                            <option value="{{$company->id}}"
+                                @if (request()->query('company') == $company->id)
+                                    selected="selected"
+                                @endif
+                            >{{$company->name}}</option>
+                        @endforeach
                 </select>
 
-                <button type="submit" id="submit-button" class="bg-indigo-800 font-bold uppercase w-2/12 h-full py-3 mr-2"> 
-                    Update
+                <button type="submit" id="submit-button" class="text-white text-sm bg-indigo-800 font-bold uppercase w-1/12 h-full py-3 mr-2"> 
+                    Filter
                 </button>
 
             </form>
