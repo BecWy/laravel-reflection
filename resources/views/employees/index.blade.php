@@ -17,13 +17,13 @@ use App\Http\Controllers\EmployeeController;
 
     <div class="mx-auto m-w-full w-full">
         
-        <div class="m-w-full w-full flex flex-wrap flex-col lg:flex-row lg:items-center lg:justify-start my-4 border-2 border-red-500">
+        <div class="m-w-full w-full flex flex-wrap flex-col lg:flex-row lg:items-center lg:justify-start my-4">
     
-            <form method="GET" action="{{ route('employees') }}" class="h-10 w-5/12 flex items-center justify between">
+            <form method="GET" action="{{ route('employees') }}" class="h-10 sm:w-full sm:max-w-full md:w-7/12 lg:w-5/12 flex items-center justify between">
                 <select
                     id="company" 
                     name="company" 
-                    class="h-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"                  
+                    class="h-full w-full sm:max-w-400 rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"                  
                     value = "{{ old('company_id') ? old('company_id') : null }}"
                     >
                         <option selected="true" value="">All Companies</option>
@@ -36,17 +36,17 @@ use App\Http\Controllers\EmployeeController;
                         @endforeach
                 </select>
 
-                <button type="submit" id="submit-button" class="text-white text-xs tracking-wider bg-indigo-800 font-bold uppercase w-20 h-full py-3 ml-1 mr-4 rounded-md"> 
+                <button type="submit" id="submit-button" class="text-white text-xs tracking-wider bg-indigo-800 font-bold uppercase w-20 h-full py-3 ml-1 lg:mr-4 rounded-md"> 
                     Filter
                 </button>
 
             </form>
 
-            <form method="GET" action="{{ route('employees') }}" class="h-10 w-5/12 flex items-center">
+            <form method="GET" action="{{ route('employees') }}" class="h-10 sm:w-full sm:max-w-full md:w-7/12 lg:w-5/12 mt-4 lg:mt-0 flex items-center">
                 <input type="text" 
                     id="search" 
                     name="search" 
-                    class="h-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"  
+                    class="h-full w-full sm:max-w-300 rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"  
                     value="{{ request()->query('search') }}"                 
                 >
 
@@ -57,7 +57,7 @@ use App\Http\Controllers\EmployeeController;
             </form>
         
             <!-- container for icon links -->
-            <div class="lg:ml-auto">
+            <div class="mt-4 lg:mt-0 lg:ml-auto">
                <a href="/employees/create" class="text-4xl cursor-pointer text-indigo-800 h-full" p-1><i class="far fa-plus-square"></i></a>
             </div>
 
