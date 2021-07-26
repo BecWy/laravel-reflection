@@ -16,7 +16,7 @@
             <form method="POST" 
                     
                     action="/companies/{{$company->id}}/destroy" 
-                    class="w-10/12" 
+                    class="w-full" 
                     enctype="multipart/form-data"> 
                 @csrf
 

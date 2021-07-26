@@ -55,12 +55,12 @@
 
                     <div class="my-2">
                         <label for="logo" class="font-bold">Logo</label><br>
-                        <br>
+                        <!-- <br> -->
                         <input 
                             type="file" 
                             id="logo" 
                             name="logo" 
-                            class="w-full"  
+                            class="w-full mt-1 mb-2"  
                             value="{{ old('logo') }}"
                         >
                         @error('logo')

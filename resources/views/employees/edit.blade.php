@@ -15,7 +15,7 @@
 
             <form method="POST" 
                     action="/employees/{{$employee->id}}/edit" 
-                    class="w-10/12" 
+                    class="w-full" 
                     role="form"
                     enctype="multipart/form-data"> 
                 @csrf

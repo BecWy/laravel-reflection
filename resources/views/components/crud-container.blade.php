@@ -11,10 +11,8 @@
     <div class="h-full w-full flex justify-start"> 
         <div class="bg-white w-full p-8 border relative">
             <a href={{ $arrowlink }} class="absolute right-4 top-4 px-4 py-2 text-3xl cursor-pointer text-indigo-800"><i class="far fa-arrow-alt-circle-left"></i></a>
-            <div class="w-7/12 flex flex-col items-start bg-white px-auto" >
-
-            {{ $content }}
-
+            <div class="sm:w-full md:w-full md:max-w-600 lg:w-7/12 flex flex-col items-start bg-white px-auto" >
+                {{ $content }}
             </div>
         </div>
     </div>

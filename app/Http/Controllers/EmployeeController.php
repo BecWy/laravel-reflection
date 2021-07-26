@@ -22,11 +22,19 @@ class EmployeeController extends Controller
      */
     
 
-    public function index()
+    public function index(Request $request)
     {
+        $companies = Company::orderBy('name', 'asc')->get();
+
+        $request->flash;
+
         return view('employees.index', [
-            'employees' => Employee::orderby('last_name')->paginate(10)
-        ]);
+            'employees' => Employee::orderby('last_name')->filter(
+                request(['company', 'search'])
+            )->paginate(10)->withQueryString()
+        ])->with('companies', $companies);
+
+
     }
 
 
@@ -56,7 +64,7 @@ class EmployeeController extends Controller
             'company_id' => ['required'],
             'email' => ['nullable', 'unique:employees,email', 'email', 'max:100'], //made it max 100 to stop it being too long.
             //may need to create my own phone validation rule???
-            'phone' => ['nullable', 'unique:employees,phone', 'max:100', new Phone]
+            'phone' => ['nullable', 'unique:employees,phone', 'max:20', new Phone]
         ]);
 
         //2. sanitise and format input before it is saved
@@ -137,7 +145,7 @@ class EmployeeController extends Controller
             'company_id' => ['required'],
             'email' => ['nullable', 'unique:employees,email,'.$employee->id, 'email', 'max:100'], //made it max 100 to stop it being too long.
             //may need to create my own phone validation rule???
-            'phone' => ['nullable', 'unique:employees,phone,'.$employee->id, 'max:100', new Phone]
+            'phone' => ['nullable', 'unique:employees,phone,'.$employee->id, 'max:20', new Phone]
         
         ]);
 

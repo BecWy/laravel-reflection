@@ -9,7 +9,7 @@
 
     <div class="mx-auto m-w-full">
         <div class="flex flex-row items-end justify-end">
-            <a href="/companies/create" class="text-3xl cursor-pointer text-indigo-800" p-1><i class="far fa-plus-square"></i></a>
+            <a href="/companies/create" class="text-4xl cursor-pointer text-indigo-800" p-1><i class="far fa-plus-square"></i></a>
         </div>
 
         <div class="overflow-x-auto md:overflow-x-hidden w-full mb-4 mt-2">
