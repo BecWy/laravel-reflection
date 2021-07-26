@@ -14,15 +14,19 @@ use App\Http\Controllers\EmployeeController;
     </x-slot>
 
 
+
     <div class="mx-auto m-w-full">
-        <div>
-            <form method="GET" action="{{ route('employees') }}">
+        
+        <div class="flex flex-row items-center justify-between my-4">
+    
+            <form method="GET" action="{{ route('employees') }}" class="h-10 w-7/12">
                 <select
                     id="company" 
                     name="company" 
-                    class="w-5/12 rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"                  
+                    class="w-9/12 h-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"                  
                     value = "{{ old('company_id') ? old('company_id') : null }}"
                     >
+                        <option selected="true" value="">All Companies</option>
                         @foreach($companies as $company)
                             <option value="{{$company->id}}"
                                 @if (request()->query('company') == $company->id)
@@ -32,16 +36,27 @@ use App\Http\Controllers\EmployeeController;
                         @endforeach
                 </select>
 
-                <button type="submit" id="submit-button" class="text-white text-sm bg-indigo-800 font-bold uppercase w-1/12 h-full py-3 mr-2"> 
+                <button type="submit" id="submit-button" class="text-white text-sm bg-indigo-800 font-bold uppercase w-1/12 h-full py-3 ml-1 rounded-md"> 
                     Filter
                 </button>
 
             </form>
-        </div>
-    
-    
-        <div class="flex flex-row items-end justify-end">
-            <a href="/employees/create" class="text-3xl cursor-pointer text-indigo-800" p-1><i class="far fa-plus-square"></i></a>
+
+            <form method="GET" action="{{ route('employees') }}" class="h-10 w-7/12">
+                <input type="text" 
+                    id="search" 
+                    name="search" 
+                    class="w-9/12 h-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"                  
+                >
+
+                <button type="submit" id="search-button" class="text-white text-sm bg-indigo-800 font-bold uppercase w-1/12 h-full py-3 ml-1 rounded-md"> 
+                    Search
+                </button>
+
+            </form>
+        
+            <a href="/employees/create" class="text-4xl cursor-pointer text-indigo-800 h-full" p-1><i class="far fa-plus-square"></i></a>
+
         </div>
 
         <div class="overflow-x-auto md:overflow-x-hidden w-full mb-4 mt-2">
