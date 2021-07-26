@@ -15,6 +15,28 @@ use App\Http\Controllers\EmployeeController;
 
 
     <div class="mx-auto m-w-full">
+        <div>
+            <form method="GET" action="{{ route('employees') }}">
+                <select
+                    id="company" 
+                    name="company" 
+                    class="w-5/12 rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" 
+                >
+                    @foreach($companies as $company)
+                        <option value="{{$company->id}}">
+                            {{$company->name}}
+                        </option>
+                    @endforeach
+                </select>
+
+                <button type="submit" id="submit-button" class="bg-indigo-800 font-bold uppercase w-2/12 h-full py-3 mr-2"> 
+                    Update
+                </button>
+
+            </form>
+        </div>
+    
+    
         <div class="flex flex-row items-end justify-end">
             <a href="/employees/create" class="text-3xl cursor-pointer text-indigo-800" p-1><i class="far fa-plus-square"></i></a>
         </div>

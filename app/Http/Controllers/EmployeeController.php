@@ -22,11 +22,69 @@ class EmployeeController extends Controller
      */
     
 
-    public function index()
+    public function index(Request $request)
     {
+        // return view('employees.index', [
+        //     'employees' => Employee::filter(request(['company']))->get(),
+        //     'companies' => Company::all(),
+        //     'currentCompany' => Company::firstWhere('company_id', request('company'))
+        // ]);
+        
+        // return view('employees.index', [
+        //     'employees' => Employee::filter(request(['company_id']))->get(),
+        //     'companies' => Company::all(),
+        //     'currentCompany' => Employee::firstWhere('company_id', request('company'))
+        // ]);
+
+        //pull the companies data into the dropdown
+        //$companies = Company::orderBy('name', 'asc')->get();
+        
+        //if there is a filter applied we want to add that filter
+         //select * from employees WHERE company_id = $company_id
+
+        // if ($request->has('company_id')) {
+        //     return view('employees', compact('employees', 'companies', 'q'));
+        // }
+
+        // if ('company_id') {
+        //     return view('employees.index', [
+        //         'employees' => Employee::orderby('last_name')
+        //         ->paginate(10)
+        //         ->where('company_id', $request->company_id)
+        //     ])->with('companies', $companies);
+            
+        // }
+        
+        
+        //if there is no filter applied we want to display all employees
+        //else {
+            // return view('employees.index', [
+            //     'employees' => Employee::orderby('last_name')->paginate(10)
+            // ])->with('companies', $companies);
+        //}
+        
+        
+
+
+        // return view('employees.index', [
+        //     'employees' => Employee::orderby('last_name')
+        //     ->where(request('company_id'))->get()
+        //        ->paginate(10)->withQueryString()
+        // ])->with('companies', $companies);
+
+        $companies = Company::orderBy('name', 'asc')->get();
         return view('employees.index', [
-            'employees' => Employee::orderby('last_name')->paginate(10)
-        ]);
+            'employees' => Employee::orderby('last_name')->filter(
+                request(['company_id'])
+            )->paginate(10)->withQueryString()
+        ])->with('companies', $companies);
+
+        // $companies = Company::orderBy('name', 'asc')->get();
+        
+        // return view('employees.index', [
+        //     'employees' => Employee::orderby('last_name')->paginate(10)
+        // ])->with('companies', $companies);
+
     }
 
 
