@@ -13,10 +13,9 @@
     <x-slot name="content">
         <h2 class="text-lg font-bold mb-4">Delete Employee</h2>
 
-            <form method="POST" 
-                    
+            <form method="POST"   
                     action="/employees/{{$employee->id}}/destroy" 
-                    class="w-10/12" 
+                    class="w-full" 
                     enctype="multipart/form-data"> 
                 @csrf
 

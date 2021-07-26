@@ -15,7 +15,7 @@
 
             <form method="POST" 
                     action="{{ route('employees.store') }}" 
-                    class="w-10/12" 
+                    class="w-full" 
                     role="form"
                     enctype="multipart/form-data"> 
                 @csrf

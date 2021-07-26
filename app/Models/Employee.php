@@ -32,8 +32,6 @@ class Employee extends Model
             ->orWhere('employees.phone', 'like', '%' . request('search') . '%');
         }
 
-       
-
         return $query;
 
     }

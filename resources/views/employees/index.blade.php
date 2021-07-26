@@ -15,15 +15,15 @@ use App\Http\Controllers\EmployeeController;
 
 
 
-    <div class="mx-auto m-w-full">
+    <div class="mx-auto m-w-full w-full">
         
-        <div class="flex flex-row items-center justify-between my-4">
+        <div class="m-w-full w-full flex flex-wrap flex-col lg:flex-row lg:items-center lg:justify-start my-4 border-2 border-red-500">
     
-            <form method="GET" action="{{ route('employees') }}" class="h-10 w-7/12">
+            <form method="GET" action="{{ route('employees') }}" class="h-10 w-5/12 flex items-center justify between">
                 <select
                     id="company" 
                     name="company" 
-                    class="w-9/12 h-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"                  
+                    class="h-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"                  
                     value = "{{ old('company_id') ? old('company_id') : null }}"
                     >
                         <option selected="true" value="">All Companies</option>
@@ -36,26 +36,30 @@ use App\Http\Controllers\EmployeeController;
                         @endforeach
                 </select>
 
-                <button type="submit" id="submit-button" class="text-white text-sm bg-indigo-800 font-bold uppercase w-1/12 h-full py-3 ml-1 rounded-md"> 
+                <button type="submit" id="submit-button" class="text-white text-xs tracking-wider bg-indigo-800 font-bold uppercase w-20 h-full py-3 ml-1 mr-4 rounded-md"> 
                     Filter
                 </button>
 
             </form>
 
-            <form method="GET" action="{{ route('employees') }}" class="h-10 w-7/12">
+            <form method="GET" action="{{ route('employees') }}" class="h-10 w-5/12 flex items-center">
                 <input type="text" 
                     id="search" 
                     name="search" 
-                    class="w-9/12 h-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"                  
+                    class="h-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"  
+                    value="{{ request()->query('search') }}"                 
                 >
 
-                <button type="submit" id="search-button" class="text-white text-sm bg-indigo-800 font-bold uppercase w-1/12 h-full py-3 ml-1 rounded-md"> 
+                <button type="submit" id="search-button" class="text-white text-xs tracking-wider bg-indigo-800 font-bold uppercase w-20 h-full py-3 ml-1 rounded-md"> 
                     Search
                 </button>
 
             </form>
         
-            <a href="/employees/create" class="text-4xl cursor-pointer text-indigo-800 h-full" p-1><i class="far fa-plus-square"></i></a>
+            <!-- container for icon links -->
+            <div class="lg:ml-auto">
+               <a href="/employees/create" class="text-4xl cursor-pointer text-indigo-800 h-full" p-1><i class="far fa-plus-square"></i></a>
+            </div>
 
         </div>
 
@@ -104,7 +108,7 @@ use App\Http\Controllers\EmployeeController;
                         <td class="border px-4 py-2 align-top text-sm">{{$employee->first_name}}</td>
                         <td class="border px-4 py-2 align-top text-sm">{{$employee->last_name}}</td>
                         <td class="border px-4 py-2 align-top text-sm">{{$employee->company->name ?? ''}}</td>
-                        <td class="border px-4 py-2 align-top text-sm">{{$employee->email;}}</td>
+                        <td class="border px-4 py-2 align-top text-sm md:break-all lg:break-normal">{{$employee->email;}}</td>
                         <td class="border px-4 py-2 align-top text-sm">{{$employee->phone;}}</td>
                         <td class="border px-4 py-2 align-top text-sm">
                             <a href="/employees/{{$employee->id}}/edit" class="pr-2 cursor-pointer"><i class="far fa-edit"></i></a>

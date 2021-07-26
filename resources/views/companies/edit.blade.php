@@ -15,7 +15,7 @@
        
             <form method="POST" 
                     action="/companies/{{$company->id}}/edit" 
-                    class="w-10/12" 
+                    class="w-full mt-1 mb-2" 
                     role="form"
                     enctype="multipart/form-data"> 
                 @csrf
@@ -55,14 +55,12 @@
                     <div class="my-2">
                         <label for="logo" class="font-bold">Logo</label><br>
                         @if($company->logo)
-                            <p>Current file:</p>
-                            <p>{{$company->logo}}</p>
+                            <p>Current file: {{$company->logo}}</p>
                         @endif
-                        <br>
                             <input type="file" 
                                 id="logo" 
                                 name="logo" 
-                                class="w-full"
+                                class="w-full mt-2 mb-2"
                                 value = "{{ old('logo') ? old('logo') : $company->logo }}" 
                             >
                             @error('logo')
