@@ -19,7 +19,7 @@ class Employee extends Model
 
     public function scopeFilter($query, array $filters)
     {
-        $queryBuilder = null;
+        //$queryBuilder = null;
         
         if(request('company')) {
             $query->where('employees.company_id', '=', request('company'));

@@ -34,7 +34,6 @@ class EmployeeController extends Controller
             )->paginate(10)->withQueryString()
         ])->with('companies', $companies);
 
-
     }
 
 
@@ -68,14 +67,13 @@ class EmployeeController extends Controller
         ]);
 
         //2. sanitise and format input before it is saved
-        $first_name = Str::lower($request->first_name);
+        $first_name = $request->first_name;
         $first_name = trim(strip_tags(ucwords($first_name)));
 
-        $last_name = Str::lower($request->last_name);
+        $last_name = $request->last_name;
         $last_name = trim(strip_tags(ucwords($last_name)));
 
-        //$email = trim(strip_tags(Str::lower($request->email)));
-        $email = $request->email;
+        $email = trim(strip_tags(Str::lower($request->email)));
         
         //need to look into this and update it
         $phone = $request->phone;
@@ -152,13 +150,13 @@ class EmployeeController extends Controller
         //2. Update the fields that have been changed
         //update the name if this has changed
         if($request->first_name) {
-            $first_name = Str::lower($request->first_name);
+            $first_name = $request->first_name;
             $first_name = trim(strip_tags(ucwords($first_name)));
             $employee->first_name = $first_name;
         }
 
         if($request->last_name) {
-            $last_name = Str::lower($request->last_name);
+            $last_name = $request->last_name;
             $last_name = trim(strip_tags(ucwords($last_name)));
             $employee->last_name = $last_name;
         }

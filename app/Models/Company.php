@@ -15,4 +15,19 @@ class Company extends Model
     {
         return $this->hasMany(Employee::class);
     }
+
+
+    public function scopeFilter($query, array $filters)
+    {
+        //$queryBuilder = null;
+
+        if(request('search')) {
+            $query->where('companies.name', 'like', '%' . request('search') . '%')
+            ->orWhere('companies.email', 'like', '%' . request('search') . '%')
+            ->orWhere('companies.website', 'like', '%' . request('search') . '%');
+        }
+
+        return $query;
+
+    }
 }

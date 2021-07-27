@@ -58,7 +58,7 @@ use App\Http\Controllers\EmployeeController;
         
             <!-- container for icon links -->
             <div class="mt-4 lg:mt-0 lg:ml-auto">
-               <a href="/employees/create" class="text-4xl cursor-pointer text-indigo-800 h-full" p-1><i class="far fa-plus-square"></i></a>
+               <a href="/employees/create" class="text-4xl cursor-pointer text-indigo-800 h-full"><i class="far fa-plus-square"></i></a>
             </div>
 
         </div>

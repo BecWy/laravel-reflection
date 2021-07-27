@@ -16,7 +16,6 @@
             <form method="POST" 
                     action="{{ route('employees.store') }}" 
                     class="w-full" 
-                    role="form"
                     enctype="multipart/form-data"> 
                 @csrf
 

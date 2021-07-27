@@ -23,12 +23,25 @@ class CompanyController extends Controller
     
 
 
-    public function index()
+    // public function index()
+    // {
+    //     return view('companies.index', [
+    //         'companies' => Company::orderby('name')->paginate(10)
+    //     ]);
+    // }
+
+    public function index(Request $request)
     {
+        $request->flash;
+
         return view('companies.index', [
-            'companies' => Company::orderby('name')->paginate(10)
+            'companies' => Company::orderby('name')->filter(
+                request(['search'])
+            )->paginate(10)->withQueryString()
         ]);
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -71,8 +84,7 @@ class CompanyController extends Controller
         }
 
         //4. sanitise and format input before it is saved
-        $name = Str::lower($request->name);
-        $name = trim(strip_tags(ucwords($name)));
+        $name = trim(strip_tags(ucwords($request->name)));
         $email = trim(strip_tags(Str::lower($request->email)));
         $website = str_replace("www.", " ", $request->website);
         $website = trim(strip_tags(Str::lower($website)));
@@ -128,6 +140,8 @@ class CompanyController extends Controller
         return view('companies.edit',compact('company'));
     }
 
+
+
     /**
      * Update the specified resource in storage.
      *
@@ -139,7 +153,9 @@ class CompanyController extends Controller
     {
         //when this doesn't work don't forget to look for mass assignment issues, protected guarded etc
         //also form field names have to match the column names
-        
+        $request->website = Str::lower($request->website);
+
+
         //1. Validate Data. Have to add $company->id to unique so that the currently saved data for that company is still permitted.
         $request->validate([
             'name' => ['required', 'unique:companies,name,'.$company->id, 'max:100'], //made it max 100 to stop it being too long.
@@ -168,8 +184,7 @@ class CompanyController extends Controller
 
         //update the name if this has changed
         if($request->name) {
-            $name = Str::lower($request->name);
-            $name = trim(strip_tags(ucwords($name)));
+            $name = trim(strip_tags(ucwords($request->name)));
             $company->name = $name;
         }
 
@@ -195,7 +210,7 @@ class CompanyController extends Controller
         //     ->with('success','Company updated successfully'); 
         //the above route is named 'companies' so I don't need to write 'companies.index'
 
-        return redirect()->route('companies', ['company' => $company])
+        return redirect()->route('companies')
             ->with('success','Company updated successfully'); 
 
     }

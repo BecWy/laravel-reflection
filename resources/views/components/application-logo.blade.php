@@ -4,7 +4,7 @@
 
 
 
-<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+<svg xmlns="http://www.w3.org/2000/svg"
  width="500pt" height="500pt" viewBox="0 0 500 500"
  preserveAspectRatio="xMidYMid meet" {{ $attributes }}>
 <metadata>
@@ -46,5 +46,6 @@ c-54 -1 -95 1 -93 6 8 22 394 631 399 632 4 0 28 -33 53 -74z m-3704 -308 c63
 -115 -2 -156 0 l-74 3 77 122 c42 68 78 121 81 119 2 -3 37 -58 78 -123z
 m4176 -45 l48 -78 -155 0 c-85 0 -155 2 -155 5 0 5 32 58 128 209 l24 39 31
 -49 c16 -27 52 -84 79 -126z"/>
+</g>
 </svg>
 

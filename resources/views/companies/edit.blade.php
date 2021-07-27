@@ -14,9 +14,8 @@
         <h2 class="text-lg font-bold mb-4">Edit Company</h2>
        
             <form method="POST" 
-                    action="/companies/{{$company->id}}/edit" 
-                    class="w-full mt-1 mb-2" 
-                    role="form"
+                    action="/companies/{{$company->id}}/edit"
+                    class="w-full mt-1 mb-2"
                     enctype="multipart/form-data"> 
                 @csrf
 
